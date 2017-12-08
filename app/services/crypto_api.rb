@@ -1,6 +1,6 @@
 require 'cryptocompare'
 
-class CryptoHandler
+class CryptoApi
   attr_reader :currency
 
   COMPARED_CURRENCY = 'USD'.freeze
