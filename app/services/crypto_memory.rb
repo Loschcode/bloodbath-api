@@ -15,18 +15,28 @@ class CryptoMemory
     end
   end
 
+  def reset
+    ensure_session
+    session[:current_value][currency] = nil
+  end
+
   private
 
   def crypto_api
     @crypto_api ||= CryptoApi.new(currency: currency)
   end
 
+  def ensure_session
+    session[:current_value] = {} unless session[:current_value]
+  end
+
   def setup
-    session[:currencies][:current_value][currency] = crypto_api.current_value
+    ensure_session
+    session[:current_value][currency] = crypto_api.current_value
   end
 
   def recover
-    session[:currencies][:current_value][currency]
+    session[:current_value]&.[](currency)
   end
 
 end
