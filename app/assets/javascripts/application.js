@@ -13,8 +13,3 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
-
-//= require vue
-//= require vue-router
-//= require vue-resource
-//= require vuex

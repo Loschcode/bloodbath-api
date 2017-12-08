@@ -33,8 +33,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# VueJS support
-gem 'vuejs-rails'
+# Front-end stuff
+gem 'webpacker'
+gem 'foreman'
 
 # Crypto following
 gem 'cryptocompare'
