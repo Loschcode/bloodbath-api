@@ -36,6 +36,9 @@ gem 'jbuilder', '~> 2.5'
 # VueJS support
 gem 'vuejs-rails'
 
+# Crypto following
+gem 'cryptocompare'
+
 group :development, :test do
   gem 'pry'
   # Adds support for Capybara system testing and selenium driver
