@@ -1,42 +1,32 @@
 class CryptoMemory
-  attr_reader :request, :session, :currency
+  attr_reader :user, :currency
 
-  def initialize(request:, currency:)
-    @request = request
-    @session = request.session
+  def initialize(user:, currency:)
+    @user = user
     @currency = currency
   end
 
   def solve
-    if recover
-      recover
+    if currency_trace.base_value
+      currency_trace.update!(current_value: crypto_api.current_value)
     else
-      setup
+      currency_trace.update!(base_value: crypto_api.current_value, current_value: crypto_api.current_value)
     end
+    currency_trace
   end
 
   def reset
-    ensure_session
-    session[:current_value][currency] = nil
+    currency_trace.destroy
   end
 
   private
 
+  def currency_trace
+    @currency_trace ||= CurrencyTrace.first_or_create(currency: currency, user: user)
+  end
+
   def crypto_api
     @crypto_api ||= CryptoApi.new(currency: currency)
-  end
-
-  def ensure_session
-    session[:current_value] = {} unless session[:current_value]
-  end
-
-  def setup
-    ensure_session
-    session[:current_value][currency] = crypto_api.current_value
-  end
-
-  def recover
-    session[:current_value]&.[](currency)
   end
 
 end
