@@ -16,7 +16,10 @@ class UserTokenController < Knock::AuthTokenController
     if params[:anonymous]
       # TODO : here we build the whole anonymous user and
       # reset the params as it was sent by him ?
-      binding.pry
+      email = "#{SecureRandom.uuid}@random.com"
+      password = SecureRandom.uuid
+      user = User.create(email: email, password: password, role: 'anonymous')
+      params[:auth] = { email: email, password: password }
     end
   end
 
@@ -26,32 +29,32 @@ class UserTokenController < Knock::AuthTokenController
     end
   end
 
-  def auth_token
-    if entity.respond_to? :to_token_payload
-      AuthToken.new payload: entity.to_token_payload
-    else
-      AuthToken.new payload: { sub: entity.id }
-    end
-  end
+  # def auth_token
+  #   if entity.respond_to? :to_token_payload
+  #     AuthToken.new payload: entity.to_token_payload
+  #   else
+  #     AuthToken.new payload: { sub: entity.id }
+  #   end
+  # end
 
-  def entity
-    @entity ||=
-    if entity_class.respond_to? :from_token_request
-      entity_class.from_token_request request
-    else
-      entity_class.find_by email: auth_params[:email]
-    end
-  end
-
-  def entity_class
-    entity_name.constantize
-  end
-
-  def entity_name
-    self.class.name.scan(/\w+/).last.split('TokenController').first
-  end
-
-  def auth_params
-    params.require(:auth).permit :email, :password
-  end
+  # def entity
+  #   @entity ||=
+  #   if entity_class.respond_to? :from_token_request
+  #     entity_class.from_token_request request
+  #   else
+  #     entity_class.find_by email: auth_params[:email]
+  #   end
+  # end
+  #
+  # def entity_class
+  #   entity_name.constantize
+  # end
+  #
+  # def entity_name
+  #   self.class.name.scan(/\w+/).last.split('TokenController').first
+  # end
+  #
+  # def auth_params
+  #   params.require(:auth).permit :email, :password
+  # end
 end
