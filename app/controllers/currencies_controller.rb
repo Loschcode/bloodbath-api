@@ -8,6 +8,7 @@ class CurrenciesController < ApplicationController
   end
 
   def show
+    binding.pry
     render json: {success: true, bullshit: true}
     return
 
