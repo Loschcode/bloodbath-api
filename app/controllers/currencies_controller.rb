@@ -1,14 +1,12 @@
 class CurrenciesController < ApplicationController
   attr_reader :currency, :base_value, :current_value
 
-  # before_action :authenticate_user
   before_action :set_currency
 
   def index
   end
 
   def show
-    binding.pry
     render json: {success: true, bullshit: true}
     return
 
