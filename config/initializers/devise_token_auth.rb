@@ -36,7 +36,7 @@ DeviseTokenAuth.setup do |config|
   # config.default_callbacks = true
 
   # Makes it possible to change the headers names
-  # config.headers_names = {:'access-token' => 'access-token',
+  # config.headers_names = {:'access-token' => 'Access-Token',
   #                        :'client' => 'client',
   #                        :'expiry' => 'expiry',
   #                        :'uid' => 'uid',
