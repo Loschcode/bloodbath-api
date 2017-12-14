@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   get 'welcome/index'
   root 'welcome#index'
 
+  resource :connect, controller: 'connect' do
+    post :anonymous
+  end
+
   resources :currencies do
   end
 
