@@ -5,6 +5,8 @@ class CreateCurrencyTrace < ActiveRecord::Migration[5.1]
       t.float :base_value
       t.float :current_value
 
+      t.belongs_to :user
+
       t.timestamps
     end
   end
