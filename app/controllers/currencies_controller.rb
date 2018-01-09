@@ -11,8 +11,12 @@ class CurrenciesController < ApplicationController
     @currency_trace = crypto_memory.solve
     @base_value = @currency_trace.base_value
     @current_value = @currency_trace.current_value
-    @difference = 100 - (base_value / current_value) * 100
-    render json: { base_value: @base_value, current_value: @current_value, difference: @difference }
+    @difference = (100 - (base_value / current_value) * 100).round(2)
+    render json: {
+      name: currency.upcase,
+      base_value: @base_value,
+      current_value: @current_value,
+      difference: @difference }
   end
 
   def destroy
