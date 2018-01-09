@@ -1,6 +1,7 @@
 class CurrenciesController < ApplicationController
   attr_reader :currency, :base_value, :current_value
 
+  before_action :authenticate_user!
   before_action :set_currency
 
   def index

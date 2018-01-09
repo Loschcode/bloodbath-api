@@ -1,7 +1,7 @@
 class CurrencyTrace < ActiveRecord::Base
-  field :currency, type: Symbol
-  field :base_value, type: Float
-  field :current_value, type: Float
-
+  validates :currency, presence: true
+  validates :base_value, presence: true
+  validates :current_value, presence: true
+  
   belongs_to :user
 end
