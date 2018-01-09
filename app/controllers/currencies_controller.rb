@@ -7,9 +7,6 @@ class CurrenciesController < ApplicationController
   end
 
   def show
-    render json: {success: true, bullshit: true}
-    return
-
     @currency_trace = crypto_memory.solve
     @base_value = @currency_trace.base_value
     @current_value = @currency_trace.current_value
