@@ -22,7 +22,9 @@ class CryptoMemory
   private
 
   def currency_trace
-    @currency_trace ||= CurrencyTrace.first_or_create(currency: currency, user: user)
+    @currency_trace ||= begin
+      CurrencyTrace.where(currency: currency, user: user).first || CurrencyTrace.create(currency: currency, user: user)
+    end
   end
 
   def crypto_api
