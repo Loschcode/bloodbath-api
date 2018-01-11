@@ -2,7 +2,6 @@ class CurrencyStateChannel < ApplicationCable::Channel
   CHANNEL_NAME = 'currency_state'
 
   def subscribed
-    binding.pry
     stream_from CHANNEL_NAME
   end
 

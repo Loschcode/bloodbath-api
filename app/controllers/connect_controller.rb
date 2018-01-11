@@ -2,7 +2,6 @@ class ConnectController < ApplicationController
 
   # NOTE : most of the authentication system is managed by devise token auth
   # we created this controller for special cases such as anonymous user log-in
-
   def anonymous
     return throw_error 'You are already signed-in' if current_user
     throw_success email: anonymous_user.email, password: anonymous_user.password
