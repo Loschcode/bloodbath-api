@@ -11,13 +11,10 @@ class CurrenciesController < ApplicationController
     @currency_tracking = tracking_handler.solve
     @currency_state = currency_tracking.currency_state
 
-    # TODO : put the logic in the front-end
-    difference = (100 - (currency_tracking.base_price / currency_state.price) * 100).round(2)
     render json: {
       success: true,
       currency_tracking: currency_tracking,
       currency_state: currency_state,
-      metadata: { difference: difference }
     }
   end
 
