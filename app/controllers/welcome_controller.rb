@@ -1,7 +1,5 @@
 class WelcomeController < ApplicationController
-  before_action :authenticate_user!
-  
   def index
-    render json: { success: true }
+    throw_success
   end
 end

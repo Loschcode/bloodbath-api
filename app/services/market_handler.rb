@@ -1,4 +1,4 @@
-class StateHandler
+class MarketHandler
   attr_reader :currency
 
   def initialize(currency:)
@@ -7,13 +7,13 @@ class StateHandler
 
   def refresh_and_fetch
     refresh
-    currency_state
+    market_coin
   end
 
   private
 
   def refresh
-    currency_state.update!(last_state)
+    market_coin.update!(last_state)
   end
 
   def last_state
@@ -23,8 +23,8 @@ class StateHandler
     }
   end
 
-  def currency_state
-    @currency_state ||= CurrencyState.where(symbol: currency).first
+  def market_coin
+    @market_coin ||= MarketCoin.where(symbol: currency).first
   end
 
   def crypto_api_finder

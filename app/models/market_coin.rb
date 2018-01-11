@@ -1,4 +1,4 @@
-class CurrencyState < ActiveRecord::Base
+class MarketCoin < ActiveRecord::Base
 
   # informations
   validates :symbol, presence: true
@@ -14,5 +14,5 @@ class CurrencyState < ActiveRecord::Base
   validates :market_cap, presence: true
   validates :price, presence: true
 
-  has_many :currency_trackings
+  has_many :coin_trackings
 end

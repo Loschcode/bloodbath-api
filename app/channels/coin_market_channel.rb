@@ -1,5 +1,5 @@
-class CurrencyStateChannel < ApplicationCable::Channel
-  CHANNEL_NAME = 'currency_state'
+class MarketCoinChannel < ApplicationCable::Channel
+  CHANNEL_NAME = 'market_coin'
 
   def subscribed
     stream_from CHANNEL_NAME

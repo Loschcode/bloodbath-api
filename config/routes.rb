@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     post :anonymous
   end
 
-  resources :currencies do
+  resources :coins do
   end
 
 end

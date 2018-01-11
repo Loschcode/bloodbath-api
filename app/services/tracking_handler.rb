@@ -7,26 +7,26 @@ class TrackingHandler
   end
 
   def solve
-    unless currency_tracking.base_price
-      currency_tracking.update!(base_price: crypto_api_finder.price)
+    unless coin_tracking.base_price
+      coin_tracking.update!(base_price: crypto_api_finder.price)
     end
-    currency_tracking
+    coin_tracking
   end
 
   def reset
-    currency_tracking.destroy
+    coin_tracking.destroy
   end
 
   private
 
-  def currency_tracking
-    @currency_tracking ||= begin
-      CurrencyTracking.where(currency_state: currency_state, user: user).first || CurrencyTracking.create(currency_state: currency_state, user: user)
+  def coin_tracking
+    @coin_tracking ||= begin
+      CoinTracking.where(market_coin: market_coin, user: user).first || CoinTracking.create(market_coin: market_coin, user: user)
     end
   end
 
-  def currency_state
-    @currency_state ||= StateHandler.new(currency: currency).refresh_and_fetch
+  def market_coin
+    @market_coin ||= MarketHandler.new(currency: currency).refresh_and_fetch
   end
 
   def crypto_api_finder

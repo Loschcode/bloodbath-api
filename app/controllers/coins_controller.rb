@@ -1,20 +1,19 @@
-class CurrenciesController < ApplicationController
-  attr_reader :currency, :currency_state, :currency_tracking
+class CoinsController < ApplicationController
+  attr_reader :currency, :market_coin, :coin_tracking
 
-  before_action :authenticate_user!
   before_action :set_currency
 
   def index
   end
 
   def show
-    @currency_tracking = tracking_handler.solve
-    @currency_state = currency_tracking.currency_state
+    @coin_tracking = tracking_handler.solve
+    @market_coin = coin_tracking.market_coin
 
     render json: {
       success: true,
-      currency_tracking: currency_tracking,
-      currency_state: currency_state,
+      coin_tracking: coin_tracking,
+      market_coin: market_coin,
     }
   end
 

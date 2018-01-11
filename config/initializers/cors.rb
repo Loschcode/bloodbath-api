@@ -11,8 +11,8 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     origins '*'
     resource '*',
       headers: :any,
+      # TODO : maybe remove this because we don't use the access token anymore
       expose: ['access-token', 'expiry', 'token-type', 'uid', 'client'],
-      #methods: [:get, :post, :options, :delete, :put],
       methods: [:get, :post, :put, :patch, :delete, :options, :head]
   end
 end

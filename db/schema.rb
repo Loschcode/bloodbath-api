@@ -15,7 +15,17 @@ ActiveRecord::Schema.define(version: 20180110225718) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "currency_states", force: :cascade do |t|
+  create_table "coin_trackings", force: :cascade do |t|
+    t.float "base_price"
+    t.bigint "user_id"
+    t.bigint "market_coin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["market_coin_id"], name: "index_coin_trackings_on_market_coin_id"
+    t.index ["user_id"], name: "index_coin_trackings_on_user_id"
+  end
+
+  create_table "market_coins", force: :cascade do |t|
     t.string "symbol"
     t.string "name"
     t.string "coin_name"
@@ -26,45 +36,18 @@ ActiveRecord::Schema.define(version: 20180110225718) do
     t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "currency_trackings", force: :cascade do |t|
-    t.float "base_price"
-    t.bigint "user_id"
-    t.bigint "currency_state_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["currency_state_id"], name: "index_currency_trackings_on_currency_state_id"
-    t.index ["user_id"], name: "index_currency_trackings_on_user_id"
+    t.index ["symbol"], name: "index_market_coins_on_symbol", unique: true
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "provider", default: "email", null: false
-    t.string "uid", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
-    t.string "confirmation_token"
-    t.datetime "confirmed_at"
-    t.datetime "confirmation_sent_at"
-    t.string "unconfirmed_email"
-    t.string "name"
-    t.string "nickname"
-    t.string "image"
+    t.string "token"
+    t.string "role"
     t.string "email"
-    t.json "tokens"
+    t.string "encrypted_password", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
+    t.index ["token"], name: "index_users_on_token", unique: true
   end
 
 end
