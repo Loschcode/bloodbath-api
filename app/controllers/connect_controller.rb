@@ -1,21 +1,18 @@
-class ConnectController < ApplicationController
+require 'digest'
 
-  # creation and sign-in of anonymous users
+class ConnectController < ApplicationController
+  # NOTE : this section is available for anyone
+
+  # creation and sign-in
+  # of anonymous users
   def anonymous
     return throw_error 'You are already signed-in' if current_user
-    throw_success email: anonymous_user.email, password: anonymous_user.password
+    throw_success token: user_maker.anonymous.token
   end
 
   private
 
-  # very small method to generate a new anonymous user
-  # if it evolves, please make a library
-  def anonymous_user
-    @anonymous_user ||= begin
-      email = "#{SecureRandom.uuid}@cryptoscreen.com"
-      password = "#{SecureRandom.uuid}"
-      User.create(email: email, password: password)
-    end
+  def user_maker
+    @user_maker ||= UserMaker.new
   end
-
 end

@@ -1,6 +1,8 @@
 class CoinsController < ApplicationController
   attr_reader :currency, :market_coin, :coin_tracking
 
+  before_action :authenticated?
+  
   before_action :set_currency
 
   def index
