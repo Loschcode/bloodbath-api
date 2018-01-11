@@ -8,19 +8,21 @@ class CurrenciesController < ApplicationController
   end
 
   def show
-    @currency_trace = crypto_memory.solve
-    @base_value = @currency_trace.base_value
-    @current_value = @currency_trace.current_value
-    @difference = (100 - (base_value / current_value) * 100).round(2)
+    @currency_tracking = tracking_handler.solve
+
+    base_value = @currency_tracking.base_price
+    current_value = @currency_tracking.currency_state.price
+
+    difference = (100 - (base_value / current_value) * 100).round(2)
     render json: {
       name: currency.upcase,
-      base_value: @base_value,
-      current_value: @current_value,
-      difference: @difference }
+      base_value: base_value,
+      current_value: current_value,
+      difference: difference }
   end
 
   def destroy
-    crypto_memory.reset
+    tracking_handler.reset
     render json: { success: true }
   end
 
@@ -30,8 +32,8 @@ class CurrenciesController < ApplicationController
     @currency = params[:id].upcase
   end
 
-  def crypto_memory
-    @crypto_memory ||= CryptoMemory.new(user: current_user, currency: currency)
+  def tracking_handler
+    @tracking_handler ||= TrackingHandler.new(user: current_user, currency: currency)
   end
 
 end

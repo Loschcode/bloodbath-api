@@ -10,19 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180109120728) do
+ActiveRecord::Schema.define(version: 20180110225718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "currency_traces", force: :cascade do |t|
-    t.string "currency"
-    t.float "base_value"
-    t.float "current_value"
-    t.bigint "user_id"
+  create_table "currency_states", force: :cascade do |t|
+    t.string "symbol"
+    t.string "name"
+    t.string "coin_name"
+    t.string "full_name"
+    t.string "algorithm"
+    t.string "proof_type"
+    t.float "market_cap"
+    t.float "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_currency_traces_on_user_id"
+  end
+
+  create_table "currency_trackings", force: :cascade do |t|
+    t.float "base_price"
+    t.bigint "user_id"
+    t.bigint "currency_state_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["currency_state_id"], name: "index_currency_trackings_on_currency_state_id"
+    t.index ["user_id"], name: "index_currency_trackings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
