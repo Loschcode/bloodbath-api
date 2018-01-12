@@ -7,7 +7,7 @@ class UserMaker
 
   def anonymous
     @anonymous ||= begin
-      User.create(
+      User.create!(
         email: anonymous_email,
         encrypted_password: encrypted(anonymous_password),
         role: :anonymous

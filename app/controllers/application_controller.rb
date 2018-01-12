@@ -19,12 +19,12 @@ class ApplicationController < ActionController::API
 
   # call was solved as a success
   def throw_success(data = {})
-    render json: { success: true, data: data }
+    render json: data, status: :ok
   end
 
   # call was solved as a failure
-  def throw_error(message)
-    render json: { success: false, error: message }
+  def throw_error(error)
+    render json: error, status: :bad_request
   end
 
   def authenticated?

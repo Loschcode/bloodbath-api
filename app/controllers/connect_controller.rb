@@ -6,7 +6,7 @@ class ConnectController < ApplicationController
   # creation and sign-in
   # of anonymous users
   def anonymous
-    return throw_error 'You are already signed-in' if current_user
+    return throw_error 'You are already signed-in' # if current_user
     throw_success token: user_maker.anonymous.token
   end
 
