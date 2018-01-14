@@ -23,13 +23,13 @@
 # end
 
 # we check all the coins listed are up to date and add the ones which aren't
-every :day do
+every 1.day do
   command 'The system has launched the rake task `rake cron:refresh_market_coins`'
   rake 'cron:refresh_market_coins'
 end
 
 # we check all the coins listed are up to date and add the ones which aren't
-every 5.seconds do
+every 1.minute do
   command 'The system has launched the rake task `rake cron:broadcast_market_coins`'
   rake 'cron:broadcast_market_coins'
 end

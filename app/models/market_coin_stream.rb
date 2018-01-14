@@ -7,4 +7,8 @@ class MarketCoinStream < ActiveRecord::Base
   # users present
   has_and_belongs_to_many :users
 
+  scope :with_users, -> do
+    self.joins(:users)
+  end
+
 end
