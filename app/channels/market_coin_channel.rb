@@ -1,13 +1,30 @@
 class MarketCoinChannel < ApplicationCable::Channel
-  CHANNEL_NAME = 'market_coin'.freeze
 
-  def subscribed
-    stream_from CHANNEL_NAME
+  def refresh_market_coin
+    broadcast action: 'refresh_market_coin', market_coin: market_coin
   end
 
-  def send_message(data)
-    binding.pry
-    # to improve obviously
-    ActionCable.server.broadcast CHANNEL_NAME, { message: 'test', name: 'yo' }
+  def ping(data)
+    broadcast action: 'pong'
+    # refresh_market_coin
+  end
+
+  private
+
+  def subscribed
+    stream_from channel
+  end
+
+  def channel
+    "market-coin-#{market_coin.id}"
+  end
+
+  def market_coin
+    # TODO : deal with failure
+    @market_coin ||= MarketCoin.find(params[:id])
+  end
+
+  def broadcast(data)
+    ActionCable.server.broadcast channel, data
   end
 end
