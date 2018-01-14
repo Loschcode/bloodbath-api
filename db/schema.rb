@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180110225718) do
+ActiveRecord::Schema.define(version: 20180114165547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(version: 20180110225718) do
     t.datetime "updated_at", null: false
     t.index ["market_coin_id"], name: "index_coin_trackings_on_market_coin_id"
     t.index ["user_id"], name: "index_coin_trackings_on_user_id"
+  end
+
+  create_table "market_coin_streams", force: :cascade do |t|
+    t.bigint "market_coin_id"
+    t.index ["market_coin_id"], name: "index_market_coin_streams_on_market_coin_id"
+  end
+
+  create_table "market_coin_streams_users", id: false, force: :cascade do |t|
+    t.bigint "market_coin_stream_id"
+    t.bigint "user_id"
+    t.index ["market_coin_stream_id"], name: "index_market_coin_streams_users_on_market_coin_stream_id"
+    t.index ["user_id"], name: "index_market_coin_streams_users_on_user_id"
   end
 
   create_table "market_coins", force: :cascade do |t|
@@ -43,7 +55,7 @@ ActiveRecord::Schema.define(version: 20180110225718) do
     t.string "token"
     t.string "role"
     t.string "email"
-    t.string "encrypted_password", default: "", null: false
+    t.string "encrypted_password", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

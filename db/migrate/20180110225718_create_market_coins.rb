@@ -15,7 +15,7 @@ class CreateMarketCoins < ActiveRecord::Migration[5.1]
       # numbers
       t.float :market_cap
       t.float :price
-
+      
       t.timestamps
     end
 

@@ -1,6 +1,6 @@
 # it will call the API to get the latest coins available
 # on the market and insert them on the database
-class Tasks::Loschcode::RefreshMarketCoins
+class Tasks::Cron::RefreshMarketCoins
 
   def initialize
     puts "Task initialized."

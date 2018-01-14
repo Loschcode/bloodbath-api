@@ -10,7 +10,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
 
       # authentication
       t.string :email
-      t.string :encrypted_password, :null => false, :default => ""
+      t.string :encrypted_password, :null => false
 
       t.timestamps
     end

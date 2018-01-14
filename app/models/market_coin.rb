@@ -14,5 +14,9 @@ class MarketCoin < ActiveRecord::Base
   validates :market_cap, presence: true
   validates :price, presence: true
 
+  # trackings
   has_many :coin_trackings
+
+  # channel users
+  has_one :market_coin_stream
 end

@@ -1,5 +1,8 @@
 development:
-  adapter: async
+  adapter: redis
+  url: redis://localhost:6379/1
+  # password: caa2e63f4501e4e44812fb10ef41db33306cff6eebd2d3efa07c18290e3ca8132bff951be700b492fade8bb686eda88a2ffa13da888dafb5391bad1e150bc00d
+  channel_prefix: cryptoscreen-api_development
 
 test:
   adapter: async

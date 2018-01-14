@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
 
   has_many :coin_trackings
 
+  # socket stream
+  has_and_belongs_to_many :market_coin_streams
+
   before_create :ensure_token
 
   private

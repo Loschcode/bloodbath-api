@@ -4,5 +4,8 @@ module ApplicationCable
     def subscribed
     end
 
+    def unsubscribed
+    end
+
   end
 end
