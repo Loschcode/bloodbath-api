@@ -12,7 +12,6 @@ class MarketCoinChannel < ApplicationCable::Channel
 
   private
 
-
   # user following (would be abstracted in a concerns or something later on)
 
   def subscribed

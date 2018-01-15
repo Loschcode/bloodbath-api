@@ -10,7 +10,6 @@ class CoinsController < ApplicationController
 
   def show
     @coin_tracking = tracking_handler.solve
-    @market_coin = coin_tracking.market_coin
 
     render json: {
       success: true,
@@ -30,8 +29,12 @@ class CoinsController < ApplicationController
     @currency = params[:id].upcase
   end
 
+  def market_coin
+    @market_coin ||= MarketHandler.new(currency: currency).refresh_and_fetch
+  end
+
   def tracking_handler
-    @tracking_handler ||= TrackingHandler.new(user: current_user, currency: currency)
+    @tracking_handler ||= TrackingHandler.new(user: current_user, market_coin: market_coin)
   end
 
 end

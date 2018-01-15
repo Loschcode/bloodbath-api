@@ -1,9 +1,9 @@
 class TrackingHandler
-  attr_reader :user, :currency
+  attr_reader :user, :market_coin
 
-  def initialize(user:, currency:)
+  def initialize(user:, market_coin:)
     @user = user
-    @currency = currency
+    @market_coin = market_coin
   end
 
   def solve
@@ -25,12 +25,8 @@ class TrackingHandler
     end
   end
 
-  def market_coin
-    @market_coin ||= MarketHandler.new(currency: currency).refresh_and_fetch
-  end
-
   def crypto_api_finder
-    @crypto_api_finder ||= CryptoApiFinder.new(currency: currency)
+    @crypto_api_finder ||= CryptoApiFinder.new(currency: market_coin.symbol)
   end
 
 end
