@@ -17,6 +17,22 @@ class CryptoApiFinder
     data['MKTCAP']
   end
 
+  def market_cap
+    data['MKTCAP']
+  end
+
+  def day_open
+    data['OPEN24HOUR']
+  end
+
+  def day_high
+    data['HIGH24HOUR']
+  end
+
+  def day_low
+    data['LOW24HOUR']
+  end
+
   private
 
   def data

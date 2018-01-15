@@ -46,6 +46,9 @@ ActiveRecord::Schema.define(version: 20180114165547) do
     t.string "proof_type"
     t.float "market_cap"
     t.float "price"
+    t.float "day_open"
+    t.float "day_high"
+    t.float "day_low"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["symbol"], name: "index_market_coins_on_symbol", unique: true

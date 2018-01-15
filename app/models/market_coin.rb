@@ -13,6 +13,9 @@ class MarketCoin < ActiveRecord::Base
   # numbers
   validates :market_cap, presence: true
   validates :price, presence: true
+  validates :day_open, presence: true
+  validates :day_high, presence: true
+  validates :day_low, presence: true
 
   # trackings
   has_many :coin_trackings

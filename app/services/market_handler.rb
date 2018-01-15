@@ -19,7 +19,10 @@ class MarketHandler
   def last_state
     {
       market_cap: crypto_api_finder.market_cap,
-      price: crypto_api_finder.price
+      price: crypto_api_finder.price,
+      day_open: crypto_api_finder.day_open,
+      day_high: crypto_api_finder.day_high,
+      day_low: crypto_api_finder.day_low
     }
   end
 

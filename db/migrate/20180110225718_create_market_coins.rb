@@ -15,7 +15,10 @@ class CreateMarketCoins < ActiveRecord::Migration[5.1]
       # numbers
       t.float :market_cap
       t.float :price
-      
+      t.float :day_open
+      t.float :day_high
+      t.float :day_low
+
       t.timestamps
     end
 
