@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20180114165547) do
     t.string "name"
     t.string "coin_name"
     t.string "full_name"
+    t.string "logo_url"
     t.string "algorithm"
     t.string "proof_type"
     t.float "market_cap"

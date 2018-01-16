@@ -13,7 +13,8 @@ class CryptoApiList
         coin_name: data.last['CoinName'],
         full_name: data.last['FullName'],
         algorithm: data.last['Algorithm'],
-        proof_type: data.last['ProofType']
+        proof_type: data.last['ProofType'],
+        logo_url: data.last['ImageUrl']
       }
     end
   end

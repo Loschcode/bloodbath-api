@@ -8,6 +8,9 @@ class CreateMarketCoins < ActiveRecord::Migration[5.1]
       t.string :coin_name
       t.string :full_name
 
+      # image
+      t.string :logo_url
+
       # details
       t.string :algorithm
       t.string :proof_type
