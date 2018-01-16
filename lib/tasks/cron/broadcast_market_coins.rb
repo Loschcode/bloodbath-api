@@ -22,9 +22,8 @@ class Tasks::Cron::BroadcastMarketCoins
         # we confirm it
         puts "It was broadcast."
 
-        sleep 5.0
       end
-
+      sleep 5.0
     end
     puts "Task performed."
   end
