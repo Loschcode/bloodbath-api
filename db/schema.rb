@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20180114165547) do
   end
 
   create_table "market_coin_streams", force: :cascade do |t|
+    t.datetime "last_broadcast_at"
     t.bigint "market_coin_id"
     t.index ["market_coin_id"], name: "index_market_coin_streams_on_market_coin_id"
   end

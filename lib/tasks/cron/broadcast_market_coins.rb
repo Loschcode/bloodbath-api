@@ -9,21 +9,22 @@ class Tasks::Cron::BroadcastMarketCoins
   end
 
   def perform
-    10.times do |time|
+    6.times do |time|
       puts "Iteration #{time}"
-
-      market_coin_streams.with_users.each do |market_coin_stream|
+      market_coin_streams.with_users.broadcastable.each do |market_coin_stream|
         market_coin = market_coin_stream.market_coin
         puts "`#{market_coin.id}`.`#{market_coin.symbol}` has `#{market_coin_stream.users.count}` users"
         # we refresh the coin from API
         market_coin = MarketHandler.new(currency: market_coin.symbol).refresh_and_fetch
         # now we broadcast to the page
         ActionCable.server.broadcast "market-coin-#{market_coin.id}", action: 'show', market_coin: market_coin
+        # we update the last broadcast
+        market_coin_stream.update!(last_broadcast_at: Time.now)
         # we confirm it
         puts "It was broadcast."
 
       end
-      sleep 5.0
+      sleep 10.0
     end
     puts "Task performed."
   end
