@@ -20,6 +20,9 @@ class MarketCoin < ActiveRecord::Base
   validates :day_high, presence: true
   validates :day_low, presence: true
 
+  # things that could be useful
+  validates :sort_order, presence: false
+
   # trackings
   has_many :coin_trackings
 

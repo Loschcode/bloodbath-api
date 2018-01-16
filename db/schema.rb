@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20180114165547) do
     t.float "day_open"
     t.float "day_high"
     t.float "day_low"
+    t.float "sort_order"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["symbol"], name: "index_market_coins_on_symbol", unique: true

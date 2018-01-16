@@ -9,7 +9,7 @@ class CoinsController < ApplicationController
   end
 
   def top
-    @market_coins = MarketCoin.order(market_cap: :desc).limit(10)
+    @market_coins = MarketCoin.order(market_cap: :desc).order(sort_order: :asc).limit(10)
     render json: {
       market_coins: market_coins,
     }

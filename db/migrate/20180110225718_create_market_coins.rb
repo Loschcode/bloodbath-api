@@ -22,6 +22,9 @@ class CreateMarketCoins < ActiveRecord::Migration[5.1]
       t.float :day_high
       t.float :day_low
 
+      # things which could be useful
+      t.float :sort_order
+
       t.timestamps
     end
 
