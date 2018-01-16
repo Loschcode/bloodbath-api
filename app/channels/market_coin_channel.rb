@@ -1,13 +1,11 @@
 class MarketCoinChannel < ApplicationCable::Channel
 
-
-  def refresh_market_coin
-    broadcast action: 'refresh_market_coin', market_coin: market_coin
+  def show
+    broadcast action: 'show', market_coin: market_coin
   end
 
   def ping(data)
     broadcast action: 'pong'
-    # refresh_market_coin
   end
 
   private

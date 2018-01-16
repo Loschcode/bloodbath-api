@@ -18,7 +18,7 @@ class Tasks::Cron::BroadcastMarketCoins
         # we refresh the coin from API
         market_coin = MarketHandler.new(currency: market_coin.symbol).refresh_and_fetch
         # now we broadcast to the page
-        ActionCable.server.broadcast "market-coin-#{market_coin.id}", action: 'refresh_market_coin', market_coin: market_coin
+        ActionCable.server.broadcast "market-coin-#{market_coin.id}", action: 'show', market_coin: market_coin
         # we confirm it
         puts "It was broadcast."
 
