@@ -1,18 +1,24 @@
 class CoinsController < ApplicationController
-  attr_reader :currency, :market_coin, :coin_tracking
+  attr_reader :currency, :market_coin, :market_coins, :coin_tracking
 
   before_action :authenticated?
 
-  before_action :set_currency
+  before_action :set_currency, except: [:index, :top]
 
   def index
+  end
+
+  def top
+    @market_coins = MarketCoin.order(market_cap: :desc).limit(10)
+    render json: {
+      market_coins: market_coins,
+    }
   end
 
   def show
     @coin_tracking = tracking_handler.solve
 
     render json: {
-      success: true,
       coin_tracking: coin_tracking,
       market_coin: market_coin,
     }
@@ -20,7 +26,7 @@ class CoinsController < ApplicationController
 
   def destroy
     tracking_handler.reset
-    render json: { success: true }
+    render json: {}
   end
 
   private
