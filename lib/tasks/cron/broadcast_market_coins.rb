@@ -11,6 +11,7 @@ class Tasks::Cron::BroadcastMarketCoins
   def perform
     6.times do |time|
       puts "Iteration #{time}"
+      binding.pry
       market_coin_streams.with_users.broadcastable.each do |market_coin_stream|
         market_coin = market_coin_stream.market_coin
         puts "`#{market_coin.id}`.`#{market_coin.symbol}` has `#{market_coin_stream.users.count}` users"
@@ -22,7 +23,6 @@ class Tasks::Cron::BroadcastMarketCoins
         market_coin_stream.update!(last_broadcast_at: Time.now)
         # we confirm it
         puts "It was broadcast."
-
       end
       sleep 10.0
     end

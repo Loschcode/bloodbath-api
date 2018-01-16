@@ -1,7 +1,7 @@
 class MarketCoinStream < ActiveRecord::Base
 
   # dates
-  validates :last_broadcast_at, presence: true
+  validates :last_broadcast_at, presence: false
 
   # trackings
   belongs_to :market_coin
