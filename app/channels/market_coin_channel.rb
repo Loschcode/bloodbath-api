@@ -13,11 +13,13 @@ class MarketCoinChannel < ApplicationCable::Channel
   # user following (would be abstracted in a concerns or something later on)
 
   def subscribed
+    super
     increase_current_users
     stream_from channel
   end
 
   def unsubscribed
+    super
     decrease_current_users
   end
 
