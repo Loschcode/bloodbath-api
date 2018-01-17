@@ -9,10 +9,11 @@ class Tasks::Cron::BroadcastMarketCoins
   end
 
   def perform
-    6.times do |time|
+    5.times do |time|
       puts "Iteration #{time}"
-      binding.pry
-      market_coin_streams.with_users.broadcastable.each do |market_coin_stream|
+      # we don't memoize the market coin stream because its data change through time
+      # and this is spawn via CRON Tab and could make issues (multiple spawns without reload)
+      MarketCoinStream.all.with_users.broadcastable.each do |market_coin_stream|
         market_coin = market_coin_stream.market_coin
         puts "`#{market_coin.id}`.`#{market_coin.symbol}` has `#{market_coin_stream.users.count}` users"
         # we refresh the coin from API
@@ -30,9 +31,5 @@ class Tasks::Cron::BroadcastMarketCoins
   end
 
   private
-
-  def market_coin_streams
-    @market_coin_streams ||= MarketCoinStream.all
-  end
 
 end

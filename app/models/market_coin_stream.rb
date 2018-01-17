@@ -15,7 +15,7 @@ class MarketCoinStream < ActiveRecord::Base
   end
 
   scope :broadcastable, -> do
-    self.where('last_broadcast_at < ?', 10.seconds.ago)
+    self.where('last_broadcast_at < ? OR last_broadcast_at IS NULL', 10.seconds.ago)
   end
 
 end
