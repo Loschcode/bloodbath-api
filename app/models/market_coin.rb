@@ -32,7 +32,7 @@ class MarketCoin < ActiveRecord::Base
   # NOTE : this will be replaced by a way
   # more effective system later on
   scope :search, -> (query) do
-    self.where('full_name ILIKE ? OR symbol ILIKE ?', "%#{query}%", "%#{query}%")
+    self.where('(full_name ILIKE ?) OR (symbol ILIKE ?) OR (coin_name ILIKE ?) OR (name ILIKE ?)', "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
   end
 
 end
