@@ -8,7 +8,7 @@ class Tasks::Cron::RefreshMarketCoins
 
   def perform
     crypto_api_list.each do |details|
-      market_coin = MarketCoin.where(details).first
+      market_coin = MarketCoin.where(symbol: details[:symbol]).first
       if market_coin
         puts "[KO] MarketCoin `#{market_coin.symbol}` already present"
       else
