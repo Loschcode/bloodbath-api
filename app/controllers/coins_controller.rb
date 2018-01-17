@@ -10,31 +10,23 @@ class CoinsController < ApplicationController
 
   def top
     @market_coins = MarketCoin.order(market_cap: :desc).order(sort_order: :asc).limit(8)
-    render json: {
-      market_coins: market_coins,
-    }
+    throw_success market_coins: market_coins
   end
 
   def search
     query = params[:query]
     @market_coins = MarketCoin.search(query).order(market_cap: :desc).order(sort_order: :asc).limit(4)
-    render json: {
-      market_coins: market_coins,
-    }
+    throw_success market_coins: market_coins
   end
 
   def show
     @coin_tracking = tracking_handler.solve
-
-    render json: {
-      coin_tracking: coin_tracking,
-      market_coin: market_coin,
-    }
+    throw_success coin_tracking: coin_tracking, market_coin: market_coin
   end
 
   def destroy
     tracking_handler.reset
-    render json: {}
+    throw_success
   end
 
   private

@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     get :search
   end
 
+  resources :coin_trackings, controller: 'coin_trackings' do
+  end
+
   resources :coins do
   end
 

@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20180114165547) do
 
   create_table "coin_trackings", force: :cascade do |t|
     t.float "base_price"
+    t.boolean "favorite", default: false
     t.bigint "user_id"
     t.bigint "market_coin_id"
     t.datetime "created_at", null: false
