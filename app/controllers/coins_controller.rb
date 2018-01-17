@@ -3,13 +3,21 @@ class CoinsController < ApplicationController
 
   before_action :authenticated?
 
-  before_action :set_currency, except: [:index, :top]
+  before_action :set_currency, except: [:index, :top, :search]
 
   def index
   end
 
   def top
-    @market_coins = MarketCoin.order(market_cap: :desc).order(sort_order: :asc).limit(10)
+    @market_coins = MarketCoin.order(market_cap: :desc).order(sort_order: :asc).limit(8)
+    render json: {
+      market_coins: market_coins,
+    }
+  end
+
+  def search
+    query = params[:query]
+    @market_coins = MarketCoin.search(query).order(market_cap: :desc).order(sort_order: :asc).limit(4)
     render json: {
       market_coins: market_coins,
     }

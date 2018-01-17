@@ -9,8 +9,9 @@ Rails.application.routes.draw do
 
   resource :coins, controller: 'coins' do
     get :top
+    get :search
   end
-  
+
   resources :coins do
   end
 

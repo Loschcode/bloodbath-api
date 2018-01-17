@@ -28,4 +28,11 @@ class MarketCoin < ActiveRecord::Base
 
   # channel users
   has_one :market_coin_stream
+
+  # NOTE : this will be replaced by a way
+  # more effective system later on
+  scope :search, -> (query) do
+    self.where('full_name ILIKE ? OR symbol ILIKE ?', "%#{query}%", "%#{query}%")
+  end
+
 end
