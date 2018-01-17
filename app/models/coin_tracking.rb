@@ -6,4 +6,6 @@ class CoinTracking < ActiveRecord::Base
   belongs_to :market_coin
   belongs_to :user
 
+  scope :with_favorite, -> { where(favorite: true) }
+
 end

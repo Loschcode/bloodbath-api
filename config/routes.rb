@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resource :coins, controller: 'coins' do
     get :top
     get :search
+    get :favorite
   end
 
   resources :coin_trackings, controller: 'coin_trackings' do
