@@ -1,6 +1,5 @@
-class CoinTracking < ActiveRecord::Base
+class UserMarketCoin < ActiveRecord::Base
 
-  # validates :base_price, presence: false <!-- might eventually be removed
   validates :favorite, presence: false
 
   belongs_to :market_coin

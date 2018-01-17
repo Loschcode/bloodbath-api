@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   validates :token, presence: false
 
-  has_many :coin_trackings
+  has_many :user_market_coins
 
   # socket stream
   has_and_belongs_to_many :market_coin_streams

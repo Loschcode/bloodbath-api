@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     get :favorite
   end
 
-  resources :coin_trackings, controller: 'coin_trackings' do
+  resources :user_market_coins, controller: 'user_market_coins' do
   end
 
   resources :coins do

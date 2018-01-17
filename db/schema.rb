@@ -15,17 +15,6 @@ ActiveRecord::Schema.define(version: 20180114165547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "coin_trackings", force: :cascade do |t|
-    t.float "base_price"
-    t.boolean "favorite", default: false
-    t.bigint "user_id"
-    t.bigint "market_coin_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["market_coin_id"], name: "index_coin_trackings_on_market_coin_id"
-    t.index ["user_id"], name: "index_coin_trackings_on_user_id"
-  end
-
   create_table "market_coin_streams", force: :cascade do |t|
     t.datetime "last_broadcast_at"
     t.bigint "market_coin_id"
@@ -56,6 +45,16 @@ ActiveRecord::Schema.define(version: 20180114165547) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["symbol"], name: "index_market_coins_on_symbol", unique: true
+  end
+
+  create_table "user_market_coins", force: :cascade do |t|
+    t.boolean "favorite", default: false
+    t.bigint "user_id"
+    t.bigint "market_coin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["market_coin_id"], name: "index_user_market_coins_on_market_coin_id"
+    t.index ["user_id"], name: "index_user_market_coins_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -24,7 +24,7 @@ class MarketCoin < ActiveRecord::Base
   validates :sort_order, presence: false
 
   # trackings
-  has_many :coin_trackings
+  has_many :user_market_coins
 
   # channel users
   has_one :market_coin_stream

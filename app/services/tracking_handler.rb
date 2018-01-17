@@ -7,14 +7,14 @@ class TrackingHandler
   end
 
   def solve
-    coin_tracking
+    user_market_coin
   end
 
   private
 
-  def coin_tracking
-    @coin_tracking ||= begin
-      CoinTracking.where(market_coin: market_coin, user: user).first || CoinTracking.create(market_coin: market_coin, user: user)
+  def user_market_coin
+    @user_market_coin ||= begin
+      UserMarketCoin.where(market_coin: market_coin, user: user).first || UserMarketCoin.create(market_coin: market_coin, user: user)
     end
   end
 
