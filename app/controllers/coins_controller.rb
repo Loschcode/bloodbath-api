@@ -43,7 +43,7 @@ class CoinsController < ApplicationController
   end
 
   def user_market_coin(market_coin)
-    @user_market_coins ||= UserMarketCoinHandler.new(user: current_user, market_coin: market_coin).find
+    UserMarketCoinHandler.new(user: current_user, market_coin: market_coin).find
   end
 
   def market_coin
