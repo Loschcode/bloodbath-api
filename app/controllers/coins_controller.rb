@@ -1,15 +1,15 @@
 class CoinsController < ApplicationController
-  attr_reader :currency, :market_coin, :market_coins, :user_market_coin
+  attr_reader :coin_name, :market_coin, :market_coins, :user_market_coin
 
   before_action :authenticated?
 
-  before_action :set_currency, except: [:index, :top, :search]
+  before_action :set_coin_name, only: [:show]
 
   def index
   end
 
   def favorite
-    @market_coins = current_user.user_market_coins.with_favorite.map(&:market_coin)
+    @market_coins = user_market_coins.with_favorite.map(&:market_coin)
     throw_success favorite_coins: coins_hash(market_coins)
   end
 
@@ -27,7 +27,7 @@ class CoinsController < ApplicationController
   end
 
   def show
-    @user_market_coin = current_user.user_market_coins.where(market_coin: market_coin).first
+    @user_market_coin = user_market_coin(market_coin)
     throw_success user_market_coin: user_market_coin, market_coin: market_coin
   end
 
@@ -37,17 +37,21 @@ class CoinsController < ApplicationController
     market_coins.reduce([]) do |acc, market_coin|
       acc << {
         market_coin: market_coin,
-        user_market_coin: current_user.user_market_coins.where(market_coin: market_coin).first
+        user_market_coin: user_market_coin(market_coin)
       }
     end
   end
 
-  def set_currency
-    @currency = params[:id].upcase
+  def user_market_coin(market_coin)
+    @user_market_coins ||= UserMarketCoinHandler.new(user: current_user, market_coin: market_coin).find
   end
 
   def market_coin
-    @market_coin ||= MarketHandler.new(currency: currency).refresh_and_fetch
+    @market_coin ||= MarketCoinHandler.new(coin_name: coin_name).refresh_and_fetch
+  end
+
+  def set_coin_name
+    @coin_name = params[:id].upcase
   end
 
 end
