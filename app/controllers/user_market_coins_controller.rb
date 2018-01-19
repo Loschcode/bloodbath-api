@@ -17,6 +17,7 @@ class UserMarketCoinsController < ApplicationController
   private
 
   def user_market_coin_params
+    params[:user_market_coin][:favorited_at] = Time.now if params[:user_market_coin][:favorited_at]
     params[:user_market_coin].permit!
   end
 

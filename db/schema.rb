@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20180114165547) do
   end
 
   create_table "user_market_coins", force: :cascade do |t|
-    t.boolean "favorite", default: false
+    t.datetime "favorited_at"
     t.bigint "user_id"
     t.bigint "market_coin_id"
     t.datetime "created_at", null: false
