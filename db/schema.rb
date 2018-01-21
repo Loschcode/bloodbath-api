@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180114165547) do
+ActiveRecord::Schema.define(version: 20180120182511) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,13 @@ ActiveRecord::Schema.define(version: 20180114165547) do
     t.index ["user_id"], name: "index_user_market_coins_on_user_id"
   end
 
+  create_table "user_settings", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "default_market_coin_id"
+    t.index ["default_market_coin_id"], name: "index_user_settings_on_default_market_coin_id"
+    t.index ["user_id"], name: "index_user_settings_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "token"
     t.string "role"
@@ -68,4 +75,5 @@ ActiveRecord::Schema.define(version: 20180114165547) do
     t.index ["token"], name: "index_users_on_token", unique: true
   end
 
+  add_foreign_key "user_settings", "users", on_delete: :cascade
 end

@@ -9,7 +9,7 @@ class CoinsController < ApplicationController
   end
 
   def favorite
-    @market_coins = current_user.user_market_coins.with_favorite.map(&:market_coin)
+    @market_coins = current_user.user_market_coins.with_favorite.order(favorited_at: :asc).map(&:market_coin)
     throw_success favorite_coins: coins_hash(market_coins)
   end
 
