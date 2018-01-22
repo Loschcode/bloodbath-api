@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     post :anonymous
   end
 
+  resource :user, controller: 'user' do
+  end
+
   resource :coins, controller: 'coins' do
     get :top
     get :search
