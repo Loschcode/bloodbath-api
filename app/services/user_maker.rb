@@ -11,11 +11,24 @@ class UserMaker
         email: anonymous_email,
         encrypted_password: encrypted(anonymous_password),
         role: :anonymous
-      )
+      ).tap do |user|
+        user_setting(user)
+      end
     end
   end
 
   private
+
+  def user_setting(user)
+    UserSetting.create!(
+      user: user,
+      default_market_coin: default_market_coin
+    )
+  end
+
+  def default_market_coin
+    MarketCoin.where(name: 'BTC').first
+  end
 
   def encrypted(password)
     BCrypt::Password.create(password)

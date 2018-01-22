@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   validates :token, presence: false
 
-  has_one :user_setting
+  has_one :user_setting, dependent: :delete
   has_many :user_market_coins
 
   # socket stream
