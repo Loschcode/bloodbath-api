@@ -1,9 +1,9 @@
 class CoinsController < ApplicationController
-  attr_reader :coin_name, :market_coin, :market_coins, :user_market_coin
+  attr_reader :coin_id, :market_coin, :market_coins, :user_market_coin
 
   before_action :authenticated?
 
-  before_action :set_coin_name, only: [:show]
+  before_action :set_coin_id, only: [:show]
 
   def index
   end
@@ -46,11 +46,11 @@ class CoinsController < ApplicationController
   end
 
   def market_coin
-    @market_coin ||= MarketCoinHandler.new(coin_name: coin_name).refresh_and_fetch
+    @market_coin ||= MarketCoinHandler.new(coin_id: coin_id).refresh_and_fetch
   end
 
-  def set_coin_name
-    @coin_name = params[:id].upcase
+  def set_coin_id
+      @coin_id = params[:id]
   end
 
 end

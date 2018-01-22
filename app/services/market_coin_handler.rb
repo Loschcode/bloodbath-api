@@ -1,8 +1,8 @@
 class MarketCoinHandler
-  attr_reader :coin_name
+  attr_reader :coin_id
 
-  def initialize(coin_name:)
-    @coin_name = coin_name
+  def initialize(coin_id: nil)
+    @coin_id = coin_id
   end
 
   def refresh_and_fetch
@@ -27,11 +27,10 @@ class MarketCoinHandler
   end
 
   def market_coin
-    @market_coin ||= MarketCoin.where(symbol: coin_name).first
+    @market_coin ||= MarketCoin.where(symbol: coin_id.upcase).first || MarketCoin.where(id: coin_id).first
   end
 
   def crypto_api_finder
-    @crypto_api_finder ||= CryptoApiFinder.new(coin_name: coin_name)
+    @crypto_api_finder ||= CryptoApiFinder.new(coin_name: market_coin.symbol)
   end
-
 end
