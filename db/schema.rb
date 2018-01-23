@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180120182511) do
+ActiveRecord::Schema.define(version: 20180123143904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,14 @@ ActiveRecord::Schema.define(version: 20180120182511) do
     t.index ["symbol"], name: "index_market_coins_on_symbol", unique: true
   end
 
+  create_table "portfolio_coins", force: :cascade do |t|
+    t.float "quantity"
+    t.bigint "user_portfolio_id"
+    t.bigint "market_coin_id"
+    t.index ["market_coin_id"], name: "index_portfolio_coins_on_market_coin_id"
+    t.index ["user_portfolio_id"], name: "index_portfolio_coins_on_user_portfolio_id"
+  end
+
   create_table "user_market_coins", force: :cascade do |t|
     t.datetime "favorited_at"
     t.bigint "user_id"
@@ -55,6 +63,11 @@ ActiveRecord::Schema.define(version: 20180120182511) do
     t.datetime "updated_at", null: false
     t.index ["market_coin_id"], name: "index_user_market_coins_on_market_coin_id"
     t.index ["user_id"], name: "index_user_market_coins_on_user_id"
+  end
+
+  create_table "user_portfolios", force: :cascade do |t|
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_user_portfolios_on_user_id"
   end
 
   create_table "user_settings", force: :cascade do |t|
@@ -75,5 +88,8 @@ ActiveRecord::Schema.define(version: 20180120182511) do
     t.index ["token"], name: "index_users_on_token", unique: true
   end
 
+  add_foreign_key "portfolio_coins", "market_coins", on_delete: :cascade
+  add_foreign_key "portfolio_coins", "user_portfolios", on_delete: :cascade
+  add_foreign_key "user_portfolios", "users", on_delete: :cascade
   add_foreign_key "user_settings", "users", on_delete: :cascade
 end

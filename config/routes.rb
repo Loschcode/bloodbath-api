@@ -16,10 +16,16 @@ Rails.application.routes.draw do
     get :favorite
   end
 
-  resources :user_market_coins, controller: 'user_market_coins' do
+  resources :coins do
   end
 
-  resources :coins do
+  resource :user_portfolio, controller: 'user_portfolio' do
+  end
+
+  resources :portfolio_coins do
+  end
+
+  resources :user_market_coins, controller: 'user_market_coins' do
   end
 
 end
