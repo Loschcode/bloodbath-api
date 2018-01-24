@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resource :connect, controller: 'connect' do
     post :anonymous
+    post :register
+    post :authenticate
   end
 
   resource :user, controller: 'user' do

@@ -5,6 +5,21 @@ class UserMaker
   def initialize
   end
 
+  def authenticate(email:, password:)
+    user = User.where(email: email).first
+    if BCrypt::Password.new(user.encrypted_password) == password
+      user
+    end
+  end
+
+  def convert_to_customer(user:, email:, password:)
+    user.update!(
+      email: email,
+      encrypted_password: BCrypt::Password.new(password),
+      role: :customer
+    )
+  end
+
   def anonymous
     @anonymous ||= begin
       User.create!(

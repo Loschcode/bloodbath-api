@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   has_one :user_setting, dependent: :delete
   has_one :user_portfolio, dependent: :delete
-  
+
   has_many :user_market_coins
 
   # socket stream
