@@ -3,10 +3,10 @@ class PortfolioCoinsController < ApplicationController
 
   before_action :authenticated?
 
-  before_action :set_portfolio_coin, only: [:update]
+  before_action :set_portfolio_coin, only: [:update, :destroy]
 
   def index
-    throw_success portfolio_coins: portfolio_coins
+    throw_success portfolio_coins: portfolio_coins.as_json(include: :market_coin)
   end
 
   def create
@@ -20,17 +20,23 @@ class PortfolioCoinsController < ApplicationController
       throw_error "#{user_market_coin.errors.full_messages.join(', ')}"
       return
     end
-    throw_success portfolio_coin: portfolio_coin
+    throw_success portfolio_coin: portfolio_coin.as_json(include: :market_coin)
   end
 
   def update
-    # unless portfolio_coin.update(portfolio_coin_params)
-    #   throw_error "#{user_portfolio.errors.full_messages.join(', ')}"
-    #   return
-    # end
-    binding.pry
-    # TODO : update through handler
-    throw_success portfolio_coin: portfolio_coin
+    unless portfolio_coin.update(portfolio_coin_params)
+      throw_error "#{user_portfolio.errors.full_messages.join(', ')}"
+      return
+    end
+    throw_success portfolio_coin: portfolio_coin.as_json(include: :market_coin)
+  end
+
+  def destroy
+    unless portfolio_coin.destroy
+      throw_error "#{user_portfolio.errors.full_messages.join(', ')}"
+      return
+    end
+    throw_success
   end
 
   private
