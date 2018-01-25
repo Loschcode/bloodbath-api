@@ -4,6 +4,8 @@ class CreateUserSetting < ActiveRecord::Migration[5.1]
       t.belongs_to :user, foreign_key: { on_delete: :cascade }
       # mainly for footer purpose
       t.references :primary_market_coin, references: :market_coins #, foreign_key: { on_delete: :nullify }
+
+      t.timestamps
     end
   end
 end

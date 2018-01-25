@@ -18,12 +18,16 @@ ActiveRecord::Schema.define(version: 20180123143904) do
   create_table "market_coin_streams", force: :cascade do |t|
     t.datetime "last_broadcast_at"
     t.bigint "market_coin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["market_coin_id"], name: "index_market_coin_streams_on_market_coin_id"
   end
 
   create_table "market_coin_streams_users", id: false, force: :cascade do |t|
     t.bigint "market_coin_stream_id"
     t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["market_coin_stream_id"], name: "index_market_coin_streams_users_on_market_coin_stream_id"
     t.index ["user_id"], name: "index_market_coin_streams_users_on_user_id"
   end
@@ -51,6 +55,8 @@ ActiveRecord::Schema.define(version: 20180123143904) do
     t.float "quantity"
     t.bigint "user_portfolio_id"
     t.bigint "market_coin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["market_coin_id"], name: "index_portfolio_coins_on_market_coin_id"
     t.index ["user_portfolio_id"], name: "index_portfolio_coins_on_user_portfolio_id"
   end
@@ -67,12 +73,16 @@ ActiveRecord::Schema.define(version: 20180123143904) do
 
   create_table "user_portfolios", force: :cascade do |t|
     t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_user_portfolios_on_user_id"
   end
 
   create_table "user_settings", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "primary_market_coin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["primary_market_coin_id"], name: "index_user_settings_on_primary_market_coin_id"
     t.index ["user_id"], name: "index_user_settings_on_user_id"
   end

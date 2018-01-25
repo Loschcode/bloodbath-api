@@ -3,6 +3,8 @@ class CreateMarketCoinStreams < ActiveRecord::Migration[5.1]
     create_table :market_coin_streams do |t|
       t.datetime :last_broadcast_at
       t.belongs_to :market_coin
+
+      t.timestamps
     end
   end
 end

@@ -50,7 +50,7 @@ class PortfolioCoinsController < ApplicationController
   end
 
   def portfolio_coins
-    @portfolio_coins ||= user_portfolio.portfolio_coins
+    @portfolio_coins ||= user_portfolio.portfolio_coins.order(created_at: :asc)
   end
 
   def set_portfolio_coin
