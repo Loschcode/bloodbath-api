@@ -72,8 +72,8 @@ ActiveRecord::Schema.define(version: 20180123143904) do
 
   create_table "user_settings", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "default_market_coin_id"
-    t.index ["default_market_coin_id"], name: "index_user_settings_on_default_market_coin_id"
+    t.bigint "primary_market_coin_id"
+    t.index ["primary_market_coin_id"], name: "index_user_settings_on_primary_market_coin_id"
     t.index ["user_id"], name: "index_user_settings_on_user_id"
   end
 

@@ -15,7 +15,7 @@ class UserMaker
   def convert_to_customer(user:, email:, password:)
     user.update!(
       email: email,
-      encrypted_password: BCrypt::Password.new(password),
+      encrypted_password: BCrypt::Password.create(password),
       role: :customer
     )
   end
@@ -37,11 +37,11 @@ class UserMaker
   def user_setting(user)
     UserSetting.create!(
       user: user,
-      default_market_coin: default_market_coin
+      primary_market_coin: primary_market_coin
     )
   end
 
-  def default_market_coin
+  def primary_market_coin
     MarketCoin.where(name: 'BTC').first
   end
 
