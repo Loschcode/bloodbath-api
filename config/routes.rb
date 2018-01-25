@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   resource :user, controller: 'user' do
   end
 
+  resource :user_setting, controller: 'user_setting' do
+  end
+
   resource :coins, controller: 'coins' do
     get :top
     get :search

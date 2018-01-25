@@ -36,9 +36,14 @@ class CoinsController < ApplicationController
     market_coins.reduce([]) do |acc, market_coin|
       acc << {
         market_coin: market_coin,
-        user_market_coin: user_market_coin(market_coin)
+        user_market_coin: user_market_coin(market_coin),
+        portfolio_coin: portfolio_coin(market_coin).as_json(:include => :market_coin)
       }
     end
+  end
+
+  def portfolio_coin(market_coin)
+    current_user.user_portfolio.portfolio_coins.where(market_coin: market_coin).first
   end
 
   def user_market_coin(market_coin)
