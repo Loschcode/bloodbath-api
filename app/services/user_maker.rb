@@ -37,8 +37,13 @@ class UserMaker
   def user_setting(user)
     UserSetting.create!(
       user: user,
-      primary_market_coin: primary_market_coin
+      primary_market_coin: primary_market_coin,
+      base_currency: base_currency
     )
+  end
+
+  def base_currency
+    BaseCurrency.where(code: 'USD').first
   end
 
   def primary_market_coin

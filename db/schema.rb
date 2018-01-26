@@ -90,9 +90,11 @@ ActiveRecord::Schema.define(version: 20180126135947) do
 
   create_table "user_settings", force: :cascade do |t|
     t.bigint "user_id"
+    t.bigint "base_currency_id"
     t.bigint "primary_market_coin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["base_currency_id"], name: "index_user_settings_on_base_currency_id"
     t.index ["primary_market_coin_id"], name: "index_user_settings_on_primary_market_coin_id"
     t.index ["user_id"], name: "index_user_settings_on_user_id"
   end
