@@ -1,12 +1,13 @@
 require 'cryptocompare'
 
 class CryptoApiFinder
-  attr_reader :coin_name
+  attr_reader :coin_name, :currencies
 
-  COMPARED_CURRENCY = 'USD'.freeze
+  BASE_CURRENCY = 'USD'.freeze
 
-  def initialize(coin_name:)
+  def initialize(coin_name:, currencies:nil)
     @coin_name = coin_name
+    @currencies = currencies || [BASE_CURRENCY]
   end
 
   def price
@@ -29,14 +30,18 @@ class CryptoApiFinder
     data['LOW24HOUR']
   end
 
+  def raw
+    fetch['RAW']
+  end
+
   private
 
   def data
-    @data ||= fetch['RAW'][coin_name][COMPARED_CURRENCY]
+    @data ||= raw[coin_name][currencies.first]
   end
 
   def fetch
-    @fetch ||= Cryptocompare::Price.full(coin_name, COMPARED_CURRENCY)
+    @fetch ||= Cryptocompare::Price.full(coin_name, currencies)
   end
 
 end

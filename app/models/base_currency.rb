@@ -6,8 +6,6 @@ class BaseCurrency < ActiveRecord::Base
   validates :exchange_rate, presence: true # 1.00
 
   validates :symbol, presence: true # $
-  validates :full_name: presence: true # United States Dollars
-
-  validates
+  validates :full_name, presence: true # United States Dollars
 
 end
