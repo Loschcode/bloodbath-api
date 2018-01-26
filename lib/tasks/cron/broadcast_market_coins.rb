@@ -15,9 +15,9 @@ class Tasks::Cron::BroadcastMarketCoins
       # and this is spawn via CRON Tab and could make issues (multiple spawns without reload)
       MarketCoinStream.all.with_users.broadcastable.each do |market_coin_stream|
         market_coin = market_coin_stream.market_coin
-        puts "`#{market_coin.id}`.`#{market_coin.symbol}` has `#{market_coin_stream.users.count}` users"
+        puts "`#{market_coin.id}`.`#{market_coin.code}` has `#{market_coin_stream.users.count}` users"
         # we refresh the coin from API
-        market_coin = MarketCoinHandler.new(coin_id: market_coin.symbol).refresh_and_fetch
+        market_coin = MarketCoinHandler.new(coin_id: market_coin.code).refresh_and_fetch
         # now we broadcast to the page
         ActionCable.server.broadcast "market-coin-#{market_coin.id}", action: 'show', market_coin: market_coin
         # we update the last broadcast

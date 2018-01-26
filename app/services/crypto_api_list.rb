@@ -8,7 +8,8 @@ class CryptoApiList
   def fetch
     list['Data'].reduce([]) do |acc, data|
       acc << {
-        symbol: data.last['Symbol'],
+        code: data.last['Symbol'], # the API is actually wrong since a symbol should be such as $ € ..
+        symbol: '', # TODO : someday we will add the feature for the symbols of each currency
         name: data.last['Name'],
         coin_name: data.last['CoinName'],
         full_name: data.last['FullName'],

@@ -6,6 +6,13 @@ namespace :cron do
 end
 
 namespace :cron do
+  desc "it will refresh the base currency and set the correct rates from the API"
+  task refresh_base_currency: :environment do
+    Tasks::Cron::RefreshBaseCurrencies.new.perform
+  end
+end
+
+namespace :cron do
   desc "it will broadcast the current market coin data to the users connected to it"
   task broadcast_market_coins: :environment do
     Tasks::Cron::BroadcastMarketCoins.new.perform

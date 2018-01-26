@@ -3,6 +3,7 @@ class CreateMarketCoins < ActiveRecord::Migration[5.1]
     create_table :market_coins do |t|
 
       # informations
+      t.string :code
       t.string :symbol
       t.string :name
       t.string :coin_name

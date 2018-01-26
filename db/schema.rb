@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123143904) do
+ActiveRecord::Schema.define(version: 20180126135947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "base_currencies", force: :cascade do |t|
+    t.string "code"
+    t.float "exchange_rate"
+    t.string "symbol"
+    t.string "full_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "market_coin_streams", force: :cascade do |t|
     t.datetime "last_broadcast_at"
@@ -33,6 +42,7 @@ ActiveRecord::Schema.define(version: 20180123143904) do
   end
 
   create_table "market_coins", force: :cascade do |t|
+    t.string "code"
     t.string "symbol"
     t.string "name"
     t.string "coin_name"

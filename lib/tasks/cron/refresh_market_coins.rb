@@ -8,15 +8,15 @@ class Tasks::Cron::RefreshMarketCoins
 
   def perform
     crypto_api_list.each do |details|
-      market_coin = MarketCoin.where(symbol: details[:symbol]).first
+      market_coin = MarketCoin.where(code: details[:symbol]).first
       if market_coin
-        puts "[KO] MarketCoin `#{market_coin.symbol}` already present"
+        puts "[KO] MarketCoin `#{market_coin.code}` already present"
       else
         market_coin = MarketCoin.create(details.merge(empty_details))
         if market_coin.errors.empty?
-          puts "[OK] MarketCoin `#{market_coin.symbol}` stored as `#{market_coin.id}`"
+          puts "[OK] MarketCoin `#{market_coin.code}` stored as `#{market_coin.id}`"
         else
-          puts "[KO] MarketCoin `#{market_coin.symbol}` did not pass validation (`#{market_coin.errors.full_messages.join(', ')}`)"
+          puts "[KO] MarketCoin `#{market_coin.code}` did not pass validation (`#{market_coin.errors.full_messages.join(', ')}`)"
         end
       end
     end

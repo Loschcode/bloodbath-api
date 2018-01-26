@@ -27,10 +27,10 @@ class MarketCoinHandler
   end
 
   def market_coin
-    @market_coin ||= MarketCoin.where(symbol: coin_id.upcase).first || MarketCoin.where(id: coin_id).first
+    @market_coin ||= MarketCoin.where(code: coin_id.upcase).first || MarketCoin.where(id: coin_id).first
   end
 
   def crypto_api_finder
-    @crypto_api_finder ||= CryptoApiFinder.new(coin_name: market_coin.symbol)
+    @crypto_api_finder ||= CryptoApiFinder.new(coin_name: market_coin.code)
   end
 end
