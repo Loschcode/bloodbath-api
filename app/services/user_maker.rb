@@ -42,7 +42,7 @@ class UserMaker
   end
 
   def primary_market_coin
-    MarketCoin.where(name: 'BTC').first
+    MarketCoin.where(code: 'BTC').first
   end
 
   def encrypted(password)
