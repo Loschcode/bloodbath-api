@@ -1,3 +1,5 @@
+# here we get the coins with all their informations
+# linked to the current user
 class CoinsController < ApplicationController
   attr_reader :coin_id, :market_coin, :market_coins, :user_market_coin
 
@@ -27,7 +29,7 @@ class CoinsController < ApplicationController
   end
 
   def show
-    throw_success user_market_coin: user_market_coin(market_coin), market_coin: market_coin
+    throw_success market_coin: market_coin, user_market_coin: user_market_coin(market_coin), portfolio_coin: portfolio_coin(market_coin)
   end
 
   private
@@ -37,7 +39,7 @@ class CoinsController < ApplicationController
       acc << {
         market_coin: market_coin,
         user_market_coin: user_market_coin(market_coin),
-        portfolio_coin: portfolio_coin(market_coin).as_json(:include => :market_coin)
+        portfolio_coin: portfolio_coin(market_coin)
       }
     end
   end
