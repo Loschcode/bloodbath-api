@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     post :authenticate
   end
 
+  resources :base_currencies do
+  end
+
   resource :user, controller: 'user' do
   end
 
@@ -30,7 +33,7 @@ Rails.application.routes.draw do
   resources :portfolio_coins do
   end
 
-  resources :user_market_coins, controller: 'user_market_coins' do
+  resources :user_market_coins do
   end
 
 end
