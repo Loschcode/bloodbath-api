@@ -7,7 +7,7 @@ class UserSettingController < ApplicationController
       return
     end
 
-    throw_success user: user
+    throw_success user_setting: user_setting
   end
 
   private
