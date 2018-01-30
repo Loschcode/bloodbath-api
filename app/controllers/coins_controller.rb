@@ -29,7 +29,7 @@ class CoinsController < ApplicationController
   end
 
   def show
-    throw_success market_coin: market_coin, user_market_coin: user_market_coin(market_coin), portfolio_coin: portfolio_coin(market_coin)
+    throw_success market_coin: MarketCoinSerializer.new(market_coin), user_market_coin: user_market_coin(market_coin), portfolio_coin: portfolio_coin(market_coin)
   end
 
   private
@@ -37,7 +37,7 @@ class CoinsController < ApplicationController
   def coins_hash(market_coins)
     market_coins.reduce([]) do |acc, market_coin|
       acc << {
-        market_coin: market_coin,
+        market_coin: MarketCoinSerializer.new(market_coin),
         user_market_coin: user_market_coin(market_coin),
         portfolio_coin: portfolio_coin(market_coin)
       }
@@ -57,7 +57,7 @@ class CoinsController < ApplicationController
   end
 
   def set_coin_id
-      @coin_id = params[:id]
+    @coin_id = params[:id]
   end
 
 end
