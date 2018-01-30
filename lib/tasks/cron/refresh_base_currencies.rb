@@ -17,6 +17,11 @@ class Tasks::Cron::RefreshBaseCurrencies
     currencies = BaseCurrency.all.map(&:code)
     finder = CryptoApiFinder.new(coin_name: coin_name, currencies: currencies)
 
+    if finder.error?
+      puts "Error with the CryptoApiFinder."
+      exit
+    end
+
     # we will now refresh all the exchange rates
     BaseCurrency.all.each do |base_currency|
       puts "We will refresh #{base_currency.code}"

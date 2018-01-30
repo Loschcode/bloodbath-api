@@ -34,6 +34,10 @@ class CryptoApiFinder
     fetch['RAW']
   end
 
+  def error?
+    fetch["Response"] == "Error"
+  end
+
   private
 
   def data

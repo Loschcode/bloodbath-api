@@ -13,7 +13,9 @@ class MarketCoinHandler
   private
 
   def refresh
-    market_coin.update!(last_state)
+    unless crypto_api_finder.error?
+      market_coin.update!(last_state)
+    end
   end
 
   def last_state
