@@ -14,32 +14,26 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 
 # Redis
-gem 'redis'
+gem 'redis', '~> 4.0.1'
 
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.5'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+# Serializer for JSON output
+gem 'active_model_serializers', '~> 0.9'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# Crypto following
+gem 'cryptocompare', '~> 0.13.0'
+
+# CRON Job
+gem 'whenever', '~> 0.10.0', :require => false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
-# CRON Job
-gem 'whenever', :require => false
-
 # Devise Token Auth
-gem 'devise_token_auth'
-gem 'omniauth-github'
-gem 'omniauth-facebook'
-gem 'omniauth-google-oauth2'
+# gem 'devise_token_auth'
+# gem 'omniauth-github'
+# gem 'omniauth-facebook'
+# gem 'omniauth-google-oauth2'
 
-# Crypto following
-gem 'cryptocompare'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
