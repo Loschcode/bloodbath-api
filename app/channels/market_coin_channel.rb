@@ -1,7 +1,7 @@
 class MarketCoinChannel < ApplicationCable::Channel
 
   def show
-    broadcast action: 'show', market_coin: market_coin
+    broadcast action: 'show', market_coin: MarketCoinSerializer.new(market_coin)
   end
 
   def ping(data)

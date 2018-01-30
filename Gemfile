@@ -14,7 +14,7 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 
 # Redis
-gem 'redis', '~> 4.0.1'
+gem 'redis', '~> 3.0'
 
 # Serializer for JSON output
 gem 'active_model_serializers', '~> 0.9'
