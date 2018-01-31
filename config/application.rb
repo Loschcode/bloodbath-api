@@ -33,6 +33,9 @@ module CryptoscreenApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    # serializer
+    # ActiveModelSerializers.config.adapter = :json_api
+
     # action cable from any origin
     config.action_cable.disable_request_forgery_protection = true
   end
