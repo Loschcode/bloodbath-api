@@ -11,7 +11,7 @@ class UserMarketCoinsController < ApplicationController
       return
     end
 
-    throw_success user_market_coin: user_market_coin
+    render json: user_market_coin
   end
 
   private

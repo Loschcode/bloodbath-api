@@ -28,12 +28,8 @@ gem 'whenever', '~> 0.10.0', :require => false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
 
-# Devise Token Auth
-# gem 'devise_token_auth'
-# gem 'omniauth-github'
-# gem 'omniauth-facebook'
-# gem 'omniauth-google-oauth2'
-
+# Bcrypt for encrypted passwords
+gem 'bcrypt'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -6,7 +6,7 @@ class UserPortfolioController < ApplicationController
   before_action :set_user_portfolio
 
   def show
-    throw_success user_portfolio: user_portfolio.as_json(include: :portfolio_coins)
+    render json: user_portfolio.as_json(include: :portfolio_coins)
   end
 
   # def update
@@ -15,7 +15,7 @@ class UserPortfolioController < ApplicationController
   #     return
   #   end
   #
-  #   throw_success user_portfolio: user_portfolio
+  #   render json: user_portfolio
   # end
 
   private

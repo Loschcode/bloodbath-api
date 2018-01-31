@@ -12,24 +12,28 @@ class CoinsController < ApplicationController
 
   def favorite
     @market_coins = current_user.user_market_coins.with_favorite.order(favorited_at: :asc).map(&:market_coin)
-    throw_success favorite_coins: coins_hash(market_coins)
+    render json: coins_hash(market_coins)
   end
 
   def top
     @market_coins = MarketCoin.order(market_cap: :desc).order(sort_order: :asc).limit(8)
     top_coins = coins_hash(market_coins)
-    throw_success top_coins: top_coins
+    render json: top_coins
   end
 
   def search
     query = params[:query]
     @market_coins = MarketCoin.search(query).order(market_cap: :desc).order(sort_order: :asc).limit(4)
     result_coins = coins_hash(market_coins)
-    throw_success result_coins: result_coins
+    render json: result_coins
   end
 
   def show
-    throw_success market_coin: MarketCoinSerializer.new(market_coin), user_market_coin: user_market_coin(market_coin), portfolio_coin: portfolio_coin(market_coin)
+    render json: {
+      market_coin: MarketCoinSerializer.new(market_coin),
+      user_market_coin: user_market_coin(market_coin),
+      portfolio_coin: portfolio_coin(market_coin)
+    }
   end
 
   private

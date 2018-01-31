@@ -7,11 +7,11 @@ class BaseCurrenciesController < ApplicationController
 
   def index
     @base_currencies = BaseCurrency.all
-    throw_success base_currencies: base_currencies
+    render json: base_currencies
   end
 
   def show
-    throw_success base_currency: base_currency
+    render json: base_currency
   end
 
   private
