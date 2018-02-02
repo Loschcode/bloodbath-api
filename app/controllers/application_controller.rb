@@ -1,21 +1,14 @@
 class ApplicationController < ActionController::API
 
-  # around_action :exception_handler
+  # NOTE : to see error details in development
+  # please comment this
+  around_action :exception_handler
 
-  # handle exception (which will throw a page error)
-  # if Rails.env.development?
-  #   def exception_handler
-  #     yield
-  #   end
-  # else
-    # def exception_handler
-    #   yield
-    # rescue Exception => exception
-    #   throw_error "#{exception}"
-    # ensure
-    #   # dispatch_error_email(exception)
-    # end
-  # end
+  def exception_handler
+    yield
+  rescue Exception => exception
+    throw_error error: "#{exception}"
+  end
 
   # call was solved as a failure
   def throw_error(error)
