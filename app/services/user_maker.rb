@@ -6,7 +6,9 @@ class UserMaker
   end
 
   def authenticate(email:, password:)
+    raise Exception, "Password can't be empty" unless password
     user = User.where(email: email).first
+    raise Exception, "This account does not exist" unless user
     if BCrypt::Password.new(user.encrypted_password) == password
       user
     end
