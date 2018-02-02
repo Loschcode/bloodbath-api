@@ -13,6 +13,7 @@ class UserMaker
   end
 
   def convert_to_customer(user:, email:, password:)
+    raise Exception, "Password can't be empty" unless password
     user.update!(
       email: email,
       encrypted_password: BCrypt::Password.create(password),

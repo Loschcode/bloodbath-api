@@ -22,7 +22,7 @@ class ConnectController < ApplicationController
     if user
       render json: user
     else
-      throw_error error: "Authentication impossible"
+      throw_error error: "Wrong credentials"
     end
   end
 

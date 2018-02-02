@@ -7,6 +7,7 @@ class ApplicationController < ActionController::API
   def exception_handler
     yield
   rescue Exception => exception
+    binding.pry
     throw_error error: "#{exception}"
   end
 
