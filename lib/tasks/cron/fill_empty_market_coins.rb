@@ -17,7 +17,7 @@ class Tasks::Cron::FillEmptyMarketCoins
         if refresh_market_coin
           puts "[OK] MarketCoin `#{market_coin.code}` was filled"
         else
-          puts "[KO] MarketCoin `#{marlet_coin.code}` was not able to be filled."
+          puts "[KO] MarketCoin `#{market_coin.code}` was not able to be filled."
         end
       end
       puts "[KO] MarketCoin `#{market_coin.code}` already contains informations"
