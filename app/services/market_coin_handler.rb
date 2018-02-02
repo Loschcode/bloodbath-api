@@ -6,6 +6,7 @@ class MarketCoinHandler
   end
 
   def refresh_and_fetch
+    return false unless market_coin
     refresh
     market_coin
   end
