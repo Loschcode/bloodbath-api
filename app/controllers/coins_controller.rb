@@ -16,7 +16,7 @@ class CoinsController < ApplicationController
   end
 
   def top
-    @market_coins = MarketCoin.order(market_cap: :desc).order(sort_order: :asc).limit(8)
+    @market_coins = MarketCoin.order(sort_order: :asc).limit(8)
     top_coins = coins_hash(market_coins)
     render json: top_coins
   end

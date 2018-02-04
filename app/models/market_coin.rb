@@ -4,6 +4,7 @@ class MarketCoin < ActiveRecord::Base
   validates :symbol, presence: true
   validates :name, presence: true
   validates :coin_name, presence: true
+  validates :code, presence: true, uniqueness: true
   validates :full_name, presence: true
 
   # image
@@ -14,11 +15,11 @@ class MarketCoin < ActiveRecord::Base
   validates :proof_type, presence: true
 
   # numbers
-  validates :market_cap, presence: true
-  validates :price, presence: true
-  validates :day_open, presence: true
-  validates :day_high, presence: true
-  validates :day_low, presence: true
+  validates :market_cap, presence: true, numericality: true
+  validates :price, presence: true, numericality: true
+  validates :day_open, presence: true, numericality: true
+  validates :day_high, presence: true, numericality: true
+  validates :day_low, presence: true, numericality: true
 
   # things that could be useful
   validates :sort_order, presence: false

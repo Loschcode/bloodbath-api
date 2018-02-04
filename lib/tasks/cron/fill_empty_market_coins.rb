@@ -19,6 +19,7 @@ class Tasks::Cron::FillEmptyMarketCoins
         else
           puts "[KO] MarketCoin `#{market_coin.code}` was not able to be filled."
         end
+        next
       end
       puts "[KO] MarketCoin `#{market_coin.code}` already contains informations"
     end
