@@ -25,3 +25,10 @@ namespace :cron do
     Tasks::Cron::BroadcastMarketCoins.new.perform
   end
 end
+
+namespace :cron do
+  desc "It will refresh the cryspibois"
+  task refresh_cryspibois: :environment do
+    Tasks::Cron::RefreshCryspibois.new.perform
+  end
+end

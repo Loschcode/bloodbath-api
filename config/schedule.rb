@@ -22,6 +22,13 @@
 #   rake 'cron:remove_empty_carts'
 # end
 
+# the useless stuff is here
+every 1.week do
+  command 'The system has launched the rake task `rake cron:refresh_cryspibois`'
+  rake 'cron:refresh_cryspibois'
+end
+
+
 # we check all the coins listed are up to date and add the ones which aren't
 every 1.day do
   command 'The system has launched the rake task `rake cron:refresh_market_coins`'
