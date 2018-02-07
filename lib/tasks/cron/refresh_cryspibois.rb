@@ -7,15 +7,14 @@ class Tasks::Cron::RefreshCryspibois
 
   def perform
     puts "Let's add some CryspiBois"
-    cryspibois
+    cryspibois.update(details)
     puts "Task performed."
   end
 
   private
 
   def cryspibois
-    MarketCoin.where(symbol: 'CRYSP').delete_all
-    MarketCoin.create(details)
+    MarketCoin.where(symbol: 'CRYSP').first || MarketCoin.create(details)
   end
 
   def details
@@ -30,10 +29,10 @@ class Tasks::Cron::RefreshCryspibois
       proof_type: 'Incredible Taste',
 
       market_cap: 1000000000,
-      price: 10.0,
-      day_open: 9.0,
-      day_high: 11.0,
-      day_low: 9.0
+      price: 0.25,
+      day_open: 0.20,
+      day_high: 0.30,
+      day_low: 0.20
     }
   end
 
