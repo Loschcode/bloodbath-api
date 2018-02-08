@@ -1,4 +1,4 @@
-require 'lib/tasks/cron/broadcast_market_coins'
+require "#{Rails.root}/lib/tasks/cron/broadcast_market_coins"
 
 class BroadcastMarketCoinsWorker
   include Sidekiq::Worker
