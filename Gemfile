@@ -9,10 +9,11 @@ end
 gem 'rails', '~> 5.1.4'
 
 # Sidekiq management
-gem 'sidekiq', '~> 5.1.0'
+gem 'sidekiq', '~> 5.0.5'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 
