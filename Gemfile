@@ -10,6 +10,7 @@ gem 'rails', '~> 5.1.4'
 
 # Sidekiq management
 gem 'sidekiq', '~> 5.0.5'
+gem 'sidekiq-cron', '~> 0.6.3'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
@@ -27,7 +28,8 @@ gem 'active_model_serializers', '~> 0.9'
 gem 'cryptocompare', '~> 0.13.0'
 
 # CRON Job
-gem 'whenever', '~> 0.10.0', :require => false
+# NOTE : this is not working with Dokku
+# gem 'whenever', '~> 0.10.0', :require => false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
