@@ -35,7 +35,7 @@ class CryptoApiFinder
   end
 
   def error?
-    fetch["Response"] == "Error"
+    fetch["Response"] == "Error" || !raw[coin_name]
   end
 
   private
