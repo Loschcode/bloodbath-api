@@ -1,6 +1,9 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   get 'home/index'
   root 'home#index'
+  mount Sidekiq::Web => '/sidekiq'
 
   resource :connect, controller: 'connect' do
     post :anonymous
