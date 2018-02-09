@@ -5,7 +5,7 @@ default: &default
 
 development:
   <<: *default
-  database: cryptoscreen
+  database: bloodbath
   username: loschcode
   # password:
   host: localhost
@@ -14,7 +14,7 @@ development:
 
 test:
   <<: *default
-  database: cryptoscreen-api_test
+  database: bloodbath-api_test
 
 production:
   <<: *default
