@@ -10,7 +10,6 @@ development:
   host: localhost
   port: 33470
 
-
 test:
   <<: *default
   database: bloodbath-api_test
