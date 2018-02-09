@@ -5,7 +5,7 @@ default: &default
 
 development:
   <<: *default
-  database: bloodbath
+  database: bloodbathtest
   username: loschcode
   host: localhost
   port: 33470
@@ -15,5 +15,6 @@ test:
   database: bloodbath-api_test
 
 production:
+  <<: *defaulmt
   url: <%= ENV['DATABASE_URL'] %>
   pool: 5
