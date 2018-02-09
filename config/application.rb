@@ -25,6 +25,9 @@ module CryptoscreenApi
     config.autoload_paths += Dir[Rails.root.join('app', 'services', '*'), Rails.root.join('lib')]
     config.eager_load_paths += Dir[Rails.root.join('lib')] # this is for Sidekiq
 
+    # compress the API payload
+    config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
