@@ -5,7 +5,7 @@ default: &default
 
 development:
   <<: *default
-  database: bloodbathtest
+  database: bloodbath
   username: loschcode
   host: localhost
   port: 33470
