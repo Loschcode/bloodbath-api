@@ -21,7 +21,7 @@ end
 
 namespace :cron do
   desc "It will refresh the base currency and set the correct rates from the API"
-  task refresh_base_currency: :environment do
+  task refresh_base_currencies: :environment do
     Tasks::Cron::RefreshBaseCurrencies.new.perform
   end
 end

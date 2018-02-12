@@ -7,6 +7,7 @@ class Tasks::Cron::RefillMarketCoins
   end
 
   def perform(empty_only: false)
+    puts "Empty only : #{empty_only}"
     MarketCoin.all.each do |market_coin|
       # if the market coin was actually never updated
       # it means there is no data in it
