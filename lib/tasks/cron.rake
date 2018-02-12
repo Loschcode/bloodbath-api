@@ -13,6 +13,13 @@ namespace :cron do
 end
 
 namespace :cron do
+  desc "It will call the API to get all the details of each coin and refresh / add them in the database"
+  task refill_market_coins: :environment do
+    Tasks::Cron::FillEmptyMarketCoins.new.perform
+  end
+end
+
+namespace :cron do
   desc "It will refresh the base currency and set the correct rates from the API"
   task refresh_base_currency: :environment do
     Tasks::Cron::RefreshBaseCurrencies.new.perform
