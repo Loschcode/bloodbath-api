@@ -12,7 +12,7 @@ class Tasks::Cron::RefreshBaseCurrencies
     puts "We refresh the exchange rates"
 
     coin_name = 'BTC'
-    exchange_base = 'USD'
+
     # we base everything on BTC for now
     currencies = BaseCurrency.all.map(&:code)
     finder = CryptoApiFinder.new(coin_name: coin_name, currencies: currencies)
@@ -25,11 +25,13 @@ class Tasks::Cron::RefreshBaseCurrencies
     # we will now refresh all the exchange rates
     BaseCurrency.all.each do |base_currency|
       puts "We will refresh #{base_currency.code}"
-      base = finder.raw[coin_name][exchange_base]['PRICE']
-      compared = finder.raw[coin_name][base_currency.code]['PRICE']
-      exchange_rate = base / compared
+      # base = finder.raw[coin_name][exchange_base]['PRICE']
+      # compared = finder.raw[coin_name][base_currency.code]['PRICE']
+      # exchange_rate = base / compared
 
-      puts "New exchange rate #{exchange_base} / #{base_currency.code} is #{exchange_rate}"
+      exchange_rate = finder.raw[coin_name][base_currency.code]['PRICE']
+
+      puts "New exchange rate #{coin_name} / #{base_currency.code} is #{exchange_rate}"
       base_currency.update!(exchange_rate: exchange_rate)
     end
 

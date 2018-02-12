@@ -3,7 +3,7 @@ require 'cryptocompare'
 class CryptoApiFinder
   attr_reader :coin_name, :currencies
 
-  BASE_CURRENCY = 'USD'.freeze
+  BASE_CURRENCY = 'BTC'.freeze
 
   def initialize(coin_name:, currencies:nil)
     @coin_name = coin_name
