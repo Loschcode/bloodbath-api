@@ -10,9 +10,9 @@ refresh_market_coins_worker:
   class: "RefreshMarketCoinsWorker"
   queue: default
 
-# once per hour
+# once per minute
 refresh_base_currencies_worker:
-  cron: "0 * * * *"
+  cron: "*/1 * * * *"
   class: "RefreshBaseCurrenciesWorker"
   queue: default
 
