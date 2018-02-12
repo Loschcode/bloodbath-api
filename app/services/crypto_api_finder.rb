@@ -11,7 +11,11 @@ class CryptoApiFinder
   end
 
   def price
-    data['PRICE']
+    if coin_name == BASE_CURRENCY
+      1.0
+    else
+      data['PRICE']
+    end
   end
 
   def market_cap
