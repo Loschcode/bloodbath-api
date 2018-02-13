@@ -6,7 +6,7 @@ class BaseCurrenciesController < ApplicationController
   before_action :set_base_currency, only: [:show]
 
   def index
-    @base_currencies = BaseCurrency.all
+    @base_currencies = BaseCurrency.order(exchange_rate: :asc).all
     render json: base_currencies
   end
 

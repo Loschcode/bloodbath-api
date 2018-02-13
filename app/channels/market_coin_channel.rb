@@ -1,8 +1,9 @@
 class MarketCoinChannel < ApplicationCable::Channel
 
-  def show
-    broadcast action: 'show', market_coin: MarketCoinSerializer.new(market_coin)
-  end
+  # def show
+  #   # NOTE : not sure it's in use
+  #   broadcast action: 'show', market_coin: MarketCoinSerializer.new(market_coin), base_currencies: base_currencies
+  # end
 
   def ping(data)
     broadcast action: 'pong'
@@ -40,6 +41,10 @@ class MarketCoinChannel < ApplicationCable::Channel
 
   def market_coin
     @market_coin ||= MarketCoin.find(params[:id])
+  end
+
+  def base_currencies
+    @base_currencies ||= BaseCurrency.all
   end
 
   def market_coin_stream

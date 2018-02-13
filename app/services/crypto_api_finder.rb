@@ -1,37 +1,46 @@
 require 'cryptocompare'
 
 class CryptoApiFinder
-  attr_reader :coin_name, :currencies
+  attr_reader :coin_name, :coins, :currencies
 
   BASE_CURRENCY = 'BTC'.freeze
 
-  def initialize(coin_name:, currencies:nil)
+  def initialize(coin_name:)
     @coin_name = coin_name
-    @currencies = currencies || [BASE_CURRENCY]
+    @coins = [coin_name, BASE_CURRENCY]
+    @currencies = [BASE_CURRENCY].push(base_currencies).flatten
   end
 
   def price
     if coin_name == BASE_CURRENCY
       1.0
     else
-      data['PRICE']
+      main_data['PRICE']
     end
   end
 
   def market_cap
-    data['MKTCAP']
+    main_data['MKTCAP']
   end
 
   def day_open
-    data['OPEN24HOUR']
+    main_data['OPEN24HOUR']
   end
 
   def day_high
-    data['HIGH24HOUR']
+    main_data['HIGH24HOUR']
   end
 
   def day_low
-    data['LOW24HOUR']
+    main_data['LOW24HOUR']
+  end
+
+  def main_data
+    @main_data ||= raw[coin_name][BASE_CURRENCY]
+  end
+
+  def base_currencies_data
+    raw[BASE_CURRENCY]
   end
 
   def raw
@@ -39,17 +48,17 @@ class CryptoApiFinder
   end
 
   def error?
-    fetch["Response"] == "Error" || !raw[coin_name]
+    !raw || !raw[coin_name]
   end
 
   private
 
-  def data
-    @data ||= raw[coin_name][currencies.first]
+  def base_currencies
+    @base_currencies ||= BaseCurrency.pluck(:code)
   end
 
   def fetch
-    @fetch ||= Cryptocompare::Price.full(coin_name, currencies)
+    @fetch ||= Cryptocompare::Price.full(coins, currencies)
   end
 
 end

@@ -1,5 +1,6 @@
 # we have a list of base currencies which need to be refreshed regularly
 class Tasks::Cron::RefreshBaseCurrencies
+  BASE_CURRENCY = 'BTC'.freeze
 
   def initialize
     puts "Task initialized."
@@ -11,29 +12,15 @@ class Tasks::Cron::RefreshBaseCurrencies
 
     puts "We refresh the exchange rates"
 
-    coin_name = 'BTC'
-
-    # we base everything on BTC for now
-    currencies = BaseCurrency.all.map(&:code)
-    finder = CryptoApiFinder.new(coin_name: coin_name, currencies: currencies)
+    finder = CryptoApiFinder.new(coin_name: BASE_CURRENCY)
 
     if finder.error?
       puts "Error with the CryptoApiFinder."
       exit
     end
 
-    # we will now refresh all the exchange rates
-    BaseCurrency.all.each do |base_currency|
-      puts "We will refresh #{base_currency.code}"
-      # base = finder.raw[coin_name][exchange_base]['PRICE']
-      # compared = finder.raw[coin_name][base_currency.code]['PRICE']
-      # exchange_rate = base / compared
-
-      exchange_rate = finder.raw[coin_name][base_currency.code]['PRICE']
-
-      puts "New exchange rate #{coin_name} / #{base_currency.code} is #{exchange_rate}"
-      base_currency.update!(exchange_rate: exchange_rate)
-    end
+    # we go through the service to update all that
+    BaseCurrenciesHandler.new.refresh(finder.base_currencies_data)
 
     puts "Task performed."
   end

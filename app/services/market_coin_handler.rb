@@ -16,6 +16,7 @@ class MarketCoinHandler
   def refresh
     unless crypto_api_finder.error?
       market_coin.update!(last_state)
+      base_currencies_handler.refresh(crypto_api_finder.base_currencies_data)
     end
   end
 
@@ -35,5 +36,9 @@ class MarketCoinHandler
 
   def crypto_api_finder
     @crypto_api_finder ||= CryptoApiFinder.new(coin_name: market_coin.code)
+  end
+
+  def base_currencies_handler
+    @base_currencies_handler ||= BaseCurrenciesHandler.new
   end
 end
