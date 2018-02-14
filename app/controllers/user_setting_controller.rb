@@ -6,7 +6,7 @@ class UserSettingController < ApplicationController
       throw_error "#{user_setting.errors.full_messages.join(', ')}"
       return
     end
-    
+
     render json: user_setting
   end
 
@@ -17,7 +17,7 @@ class UserSettingController < ApplicationController
   end
 
   def user_setting
-    user.user_setting
+    @user_setting ||= user.user_setting
   end
 
   def user
