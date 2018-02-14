@@ -6,16 +6,17 @@ class PortfolioCoinsController < ApplicationController
   before_action :set_portfolio_coin, only: [:update, :destroy]
 
   def index
+    refresh_market_coins(portfolio_coins)
+
     render json: portfolio_coins, each_serializer: PortfolioCoinSerializer
   end
 
   def create
-    # TODO : should be a validation
     if already_present?(portfolio_coin_params[:market_coin_id])
       throw_error "Market coin already inserted"
       return
     end
-    # END OF VALIDATION
+
     unless portfolio_coin = create_portfolio_coin
       throw_error "#{user_market_coin.errors.full_messages.join(', ')}"
       return
@@ -40,6 +41,10 @@ class PortfolioCoinsController < ApplicationController
   end
 
   private
+
+  def refresh_market_coins(portfolio_coins)
+    MarketCoinHandler.new(coin_ids: portfolio_coins.map(&:market_coin_id)).refresh_and_fetch
+  end
 
   def create_portfolio_coin
     PortfolioCoin.create(portfolio_coin_params.merge(user_portfolio: user_portfolio))

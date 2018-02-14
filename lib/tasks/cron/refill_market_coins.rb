@@ -13,7 +13,7 @@ class Tasks::Cron::RefillMarketCoins
       # it means there is no data in it
       if fresh_market_coin?(market_coin) || (empty_only == false)
         # we use our handler
-        refresh_market_coin = MarketCoinHandler.new(coin_id: market_coin.code).refresh_and_fetch
+        refresh_market_coin = MarketCoinHandler.new(coin_ids: [market_coin.code]).refresh_and_fetch
         # we check if it went well
         if refresh_market_coin
           puts "[OK] MarketCoin `#{market_coin.code}` was filled"

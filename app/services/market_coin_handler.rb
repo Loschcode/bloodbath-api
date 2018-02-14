@@ -1,41 +1,49 @@
 class MarketCoinHandler
-  attr_reader :coin_id
+  attr_reader :coin_ids
 
-  def initialize(coin_id: nil)
-    @coin_id = coin_id
+  def initialize(coin_ids: nil)
+    @coin_ids = coin_ids
   end
 
   def refresh_and_fetch
-    return false unless market_coin
+    return false unless market_coins.present?
     refresh
-    market_coin
+    market_coins
   end
 
   private
 
   def refresh
-    unless crypto_api_finder.error?
-      market_coin.update!(last_state)
-      base_currencies_handler.refresh(crypto_api_finder.base_currencies_data)
+    unless finder.error?
+      market_coins.each do |market_coin|
+        next unless finder.current(market_coin.code)
+        market_coin.update! finder.current(market_coin.code)
+      end
+
+      base_currencies_handler.refresh(finder.base_currencies_data)
     end
   end
 
-  def last_state
-    {
-      market_cap: crypto_api_finder.market_cap,
-      price: crypto_api_finder.price,
-      day_open: crypto_api_finder.day_open,
-      day_high: crypto_api_finder.day_high,
-      day_low: crypto_api_finder.day_low
-    }
+  def market_coins
+    @market_coins ||= begin
+      if from_coin_code?
+        MarketCoin.where(code: coin_ids.map(&:upcase)).all
+      else
+        MarketCoin.where(id: coin_ids).all
+      end
+    end
   end
 
-  def market_coin
-    @market_coin ||= MarketCoin.where(code: coin_id.upcase).first || MarketCoin.where(id: coin_id).first
+  def from_coin_code?
+    coin_ids.first&.to_i == 0
   end
 
-  def crypto_api_finder
-    @crypto_api_finder ||= CryptoApiFinder.new(coin_name: market_coin.code)
+  def coin_codes
+    market_coins.map(&:code)
+  end
+
+  def finder
+    @finder ||= CoinApiFinder.new(coin_codes: coin_codes)
   end
 
   def base_currencies_handler

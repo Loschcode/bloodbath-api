@@ -12,10 +12,10 @@ class Tasks::Cron::RefreshBaseCurrencies
 
     puts "We refresh the exchange rates"
 
-    finder = CryptoApiFinder.new(coin_name: BASE_CURRENCY)
+    finder = CoinApiFinder.new(coin_names: [BASE_CURRENCY])
 
     if finder.error?
-      puts "Error with the CryptoApiFinder."
+      puts "Error with the CoinApiFinder."
       exit
     end
 
