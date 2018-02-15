@@ -13,28 +13,39 @@ class CoinApiFinder
 
   def current(code)
     return false unless coins_data(code)
-    # wrong return from API, it happens sometimes with BTC
-    return false if coins_data(code)['MKTCAP'] == 0
-
     current = {
-      price: coins_data(code)['PRICE'],
-      market_cap: coins_data(code)['MKTCAP'],
-      day_open: coins_data(code)['OPEN24HOUR'],
-      day_high: coins_data(code)['HIGH24HOUR'],
-      day_low: coins_data(code)['LOW24HOUR'],
+      price: coins_data(code, 'PRICE'),
+      market_cap: coins_data(code, 'MKTCAP'),
+      day_open: coins_data(code, 'OPEN24HOUR'),
+      day_high: coins_data(code, 'HIGH24HOUR'),
+      day_low: coins_data(code, 'LOW24HOUR'),
     }
 
     # if we look for the main data of BTC
     # we don't actually give the data out
     current.delete(:price) if code == BASE_CURRENCY
 
+    # we also delete any current returning false
+    current.delete_if { |key, value| value == false }
+
     current
   end
 
-  def coins_data(code)
+  def coins_data(code, label=nil)
     return false unless raw[code]
+    return raw[code][BASE_CURRENCY] unless label
 
-    raw[code][BASE_CURRENCY]
+    # we ensure it as a number
+    data = raw[code][BASE_CURRENCY][label].to_f
+
+    # for any corrupted data from the API
+    # we will return false
+    # it will later be processed and escaped if needed
+    if data == 0.0
+      false
+    else
+      data
+    end
   end
 
   def base_currencies_data

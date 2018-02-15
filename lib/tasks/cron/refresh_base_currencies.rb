@@ -9,10 +9,11 @@ class Tasks::Cron::RefreshBaseCurrencies
   def perform
     puts "We ensure the base currencies .."
     ensure_base_currencies
+    ensure_bitcoin
 
     puts "We refresh the exchange rates"
 
-    finder = CoinApiFinder.new(coin_names: [BASE_CURRENCY])
+    finder = CoinApiFinder.new(coin_codes: [BASE_CURRENCY])
 
     if finder.error?
       puts "Error with the CoinApiFinder."
@@ -26,6 +27,15 @@ class Tasks::Cron::RefreshBaseCurrencies
   end
 
   private
+
+  def ensure_bitcoin
+    btc = MarketCoin.where(code: 'BTC').first
+    if btc && btc.price == 0.0
+      btc.price = 1.0
+      btc.save(validate: false)
+      puts "We set the BTC price to `1.0`"
+    end
+  end
 
   def ensure_base_currencies
     [usd, eur, gbp].each do |currency|

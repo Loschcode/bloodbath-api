@@ -27,7 +27,7 @@ class CryptoApiList
 
   def logo_url(data)
     if data.last['ImageUrl']
-      "https://www.cryptocompare.com#{data.last['ImageUrl']}"
+      "/static/images/coins/#{data.last['ImageUrl']}"
     else
       ""
     end

@@ -24,7 +24,7 @@ class Tasks::Cron::RefreshCryspibois
       coin_name: 'CryspiBois',
       code: 'CRYSP',
       full_name: 'CryspiBois (CRYSP)',
-      logo_url: 'http://cdn.playbuzz.com/cdn/1b8579b7-f9c9-4236-85a5-6e7027f312f5/07c0d462-4736-443a-818b-212dd95b915b.jpg',
+      logo_url: '/static/images/coins/media/crysp.jpg',
       algorithm: 'Chicken Nuggets Engine',
       proof_type: 'Incredible Taste',
 
