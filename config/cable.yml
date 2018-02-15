@@ -1,7 +1,7 @@
 development:
   adapter: redis
   url: redis://localhost:6379/1
-  channel_prefix: Marketweather-api_development
+  channel_prefix: bloodbath-api_development
 
 test:
   adapter: async
@@ -9,4 +9,4 @@ test:
 production:
   adapter: redis
   url: <%= ENV['REDIS_URL'] %>
-  channel_prefix: Marketweather-api_production
+  channel_prefix: bloodbath-api_production

@@ -5,14 +5,14 @@ default: &default
 
 development:
   <<: *default
-  database: Marketweather
+  database: bloodbath
   username: loschcode
   host: localhost
   port: 33470
 
 test:
   <<: *default
-  database: Marketweather-api_test
+  database: bloodbath-api_test
 
 production:
   <<: *default

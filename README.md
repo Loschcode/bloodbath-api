@@ -1,3 +1,3 @@
-# Marketweather Api
+# Bloodbath Api
 
-[api.Marketweather.io](http://api.Marketweather.io)
+[api.bloodbath.io](http://api.bloodbath.io)
