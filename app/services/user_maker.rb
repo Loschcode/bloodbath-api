@@ -58,7 +58,7 @@ class UserMaker
   end
 
   def anonymous_email
-    "#{SecureRandom.uuid}@bloodbath.io"
+    "#{SecureRandom.uuid}@Marketweather.io"
   end
 
   def anonymous_password
