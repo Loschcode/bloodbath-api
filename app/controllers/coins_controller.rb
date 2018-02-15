@@ -13,6 +13,7 @@ class CoinsController < ApplicationController
   def favorite
     @market_coins = current_user.user_market_coins.with_favorite.order(favorited_at: :asc).map(&:market_coin)
     refresh_market_coins(market_coins)
+    market_coins.map(&:reload)
 
     render json: coins_hash(market_coins)
   end
@@ -20,6 +21,7 @@ class CoinsController < ApplicationController
   def top
     @market_coins = MarketCoin.order(sort_order: :asc).limit(12)
     refresh_market_coins(market_coins)
+    market_coins.reload
 
     top_coins = coins_hash(market_coins)
     render json: top_coins
@@ -50,7 +52,6 @@ class CoinsController < ApplicationController
   # will systematically be new fresh data.
   def refresh_market_coins(market_coins)
     MarketCoinHandler.new(coin_ids: market_coins.map(&:id)).refresh_and_fetch
-    market_coins.reload
   end
 
   def coins_hash(market_coins)
