@@ -50,6 +50,7 @@ class CoinsController < ApplicationController
   # will systematically be new fresh data.
   def refresh_market_coins(market_coins)
     MarketCoinHandler.new(coin_ids: market_coins.map(&:id)).refresh_and_fetch
+    market_coins.reload
   end
 
   def coins_hash(market_coins)
