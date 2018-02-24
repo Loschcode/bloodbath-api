@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     get :top
     get :search
     get :favorite
+    get :weather
   end
 
   resources :coins do

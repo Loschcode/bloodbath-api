@@ -27,6 +27,24 @@ class CoinsController < ApplicationController
     render json: top_coins
   end
 
+  def weather
+    @market_coins = MarketCoin.order(sort_order: :asc).limit(100)
+    variation = 0
+    quantities = 0
+
+    market_coins.each do |market_coin|
+      market_coin = MarketCoinSerializer.new(market_coin)
+      if market_coin.object.market_cap > 0
+        variation += market_coin.price_variation * market_coin.object.market_cap
+        quantities += market_coin.object.market_cap
+      end
+    end
+
+    market_weather = variation / quantities
+
+    render json: market_weather
+  end
+
   def search
     query = params[:query]
     @market_coins = MarketCoin.search(query).order(market_cap: :desc).order(sort_order: :asc).limit(4)
