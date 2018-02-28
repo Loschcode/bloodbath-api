@@ -1,6 +1,6 @@
 class MarketCoinSerializer < ActiveModel::Serializer
   attributes :id, :symbol, :code, :name, :coin_name, :full_name, :logo_url,
-             :market_cap, :price, :day_open, :day_high, :day_low,
+             :market_cap, :price, :day_open, :day_high, :day_low, :rank,
              :price_variation, :day_high_variation, :day_low_variation
 
   def price_variation
