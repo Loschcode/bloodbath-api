@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180215104528) do
+ActiveRecord::Schema.define(version: 20180228215116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20180215104528) do
     t.float "day_open"
     t.float "day_high"
     t.float "day_low"
-    t.float "sort_order"
+    t.integer "rank"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["symbol"], name: "index_market_coins_on_symbol", unique: true

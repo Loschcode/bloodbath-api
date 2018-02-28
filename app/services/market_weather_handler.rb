@@ -20,7 +20,7 @@ class MarketWeatherHandler
   end
 
   def market_coins
-    @market_coins ||= MarketCoin.order(sort_order: :asc).limit(30)
+    @market_coins ||= MarketCoin.order(rank: :asc).limit(100)
   end
 
   def market_weather

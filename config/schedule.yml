@@ -10,6 +10,12 @@ refresh_market_coins_worker:
   class: "RefreshMarketCoinsWorker"
   queue: default
 
+# once per day at midnight
+refresh_market_coins_ranks_worker:
+  cron: "0 0 * * *"
+  class: "RefreshMarketCoinsRanksWorker"
+  queue: default
+
 # once per minute <-- it'll systematically be refreshed
 # refresh_base_currencies_worker:
 #   cron: "*/1 * * * *"

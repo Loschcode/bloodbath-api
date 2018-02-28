@@ -22,7 +22,7 @@ class MarketCoin < ActiveRecord::Base
   validates :day_low, presence: true, numericality: true
 
   # things that could be useful
-  validates :sort_order, presence: false
+  validates :rank, presence: false
 
   # trackings
   has_many :user_market_coins

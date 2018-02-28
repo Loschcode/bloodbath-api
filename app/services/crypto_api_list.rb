@@ -15,7 +15,7 @@ class CryptoApiList
         full_name: data.last['FullName'],
         algorithm: data.last['Algorithm'],
         proof_type: data.last['ProofType'],
-        sort_order: data.last['SortOrder'],
+        # rank: data.last['SortOrder'], # was replaced by the top 100 and then unknown rank it's in another task
         # we manipulate the URL because it's not only a path
         # we can change it easily this way.
         logo_url: logo_url(data)

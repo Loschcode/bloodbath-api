@@ -1,7 +1,14 @@
 namespace :cron do
-  desc "It will call the API to get the latest coins available on the market and insert them in the database"
+  desc "It will call the Cryptocompare API to get the latest coins available on the market and insert them in the database"
   task refresh_market_coins: :environment do
     Tasks::Cron::RefreshMarketCoins.new.perform
+  end
+end
+
+namespace :cron do
+  desc "It will call the Marketcoincap API to get the latest ranks available and refesh the market coins"
+  task refresh_market_coins_ranks: :environment do
+    Tasks::Cron::RefreshMarketCoinsRanks.new.perform
   end
 end
 

@@ -19,7 +19,7 @@ class CoinsController < ApplicationController
   end
 
   def top
-    @market_coins = MarketCoin.order(sort_order: :asc).limit(8)
+    @market_coins = MarketCoin.order(rank: :asc).limit(8)
     refresh_market_coins(market_coins)
     market_coins.reload
 
@@ -33,7 +33,7 @@ class CoinsController < ApplicationController
 
   def search
     query = params[:query]
-    @market_coins = MarketCoin.search(query).order(market_cap: :desc).order(sort_order: :asc).limit(4)
+    @market_coins = MarketCoin.search(query).order(market_cap: :desc).order(rank: :asc).limit(4)
     result_coins = coins_hash(market_coins)
     render json: result_coins
   end
