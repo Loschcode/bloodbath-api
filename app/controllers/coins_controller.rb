@@ -19,7 +19,7 @@ class CoinsController < ApplicationController
   end
 
   def top
-    @market_coins = MarketCoin.order(sort_order: :asc).limit(12)
+    @market_coins = MarketCoin.order(sort_order: :asc).limit(8)
     refresh_market_coins(market_coins)
     market_coins.reload
 
@@ -28,20 +28,6 @@ class CoinsController < ApplicationController
   end
 
   def weather
-    @market_coins = MarketCoin.order(sort_order: :asc).limit(100)
-    variation = 0
-    quantities = 0
-
-    market_coins.each do |market_coin|
-      market_coin = MarketCoinSerializer.new(market_coin)
-      if market_coin.object.market_cap > 0
-        variation += market_coin.price_variation * market_coin.object.market_cap
-        quantities += market_coin.object.market_cap
-      end
-    end
-
-    market_weather = variation / quantities
-
     render json: market_weather
   end
 
@@ -70,6 +56,10 @@ class CoinsController < ApplicationController
   # will systematically be new fresh data.
   def refresh_market_coins(market_coins)
     MarketCoinHandler.new(coin_ids: market_coins.map(&:id)).refresh_and_fetch
+  end
+
+  def market_weather
+    MarketWeatherHandler.new.fetch
   end
 
   def coins_hash(market_coins)

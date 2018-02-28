@@ -21,3 +21,9 @@ broadcast_market_coins_worker:
   cron: "*/1 * * * *"
   class: "BroadcastMarketCoinsWorker"
   queue: default
+
+# once per 1 minute
+broadcast_market_weather_worker:
+  cron: "*/1 * * * *"
+  class: "BroadcastMarketWeatherWorker"
+  queue: default
