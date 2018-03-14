@@ -41,7 +41,8 @@ class UserMaker
     UserSetting.create!(
       user: user,
       primary_market_coin: primary_market_coin,
-      base_currency: base_currency
+      base_currency: base_currency,
+      weather: true
     )
   end
 
