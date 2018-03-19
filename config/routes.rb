@@ -11,6 +11,9 @@ Rails.application.routes.draw do
     post :authenticate
   end
 
+  resources :metrics do
+  end
+
   resources :base_currencies do
   end
 
