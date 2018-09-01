@@ -8,7 +8,7 @@ development:
   database: bloodbath
   username: loschcode
   host: localhost
-  port: 33470
+  port: 5432
 
 test:
   <<: *default
