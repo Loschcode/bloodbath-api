@@ -1,5 +1,6 @@
 # very simple algorithm to get the current weather depending the `market_coins` selected
 class MarketWeatherHandler
+  WEATHER_COINS = 20.freeze
 
   def initialize
   end
@@ -20,7 +21,7 @@ class MarketWeatherHandler
   end
 
   def market_coins
-    @market_coins ||= MarketCoin.order(rank: :asc).limit(20)
+    @market_coins ||= MarketCoin.order(rank: :asc).limit(WEATHER_COINS)
   end
 
   def market_weather
