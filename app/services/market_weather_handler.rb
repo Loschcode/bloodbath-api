@@ -25,17 +25,17 @@ class MarketWeatherHandler
   end
 
   def market_weather
-    variation = 0
+    variations = []
     quantities = 0
 
     market_coins.each do |market_coin|
       market_coin = MarketCoinSerializer.new(market_coin)
       if market_coin.object.market_cap > 0
-        variation += market_coin.price_variation # * market_coin.object.market_cap
+        variations << market_coin.price_variation # * market_coin.object.market_cap
         quantities += 1 # market_coin.object.market_cap
       end
     end
 
-    variation / quantities
+    variations.sum / quantities
   end
 end
