@@ -20,6 +20,7 @@ class MarketCoin < ActiveRecord::Base
   validates :day_open, presence: true, numericality: true
   validates :day_high, presence: true, numericality: true
   validates :day_low, presence: true, numericality: true
+  validates :all_time_high, presence: true, numericality: true
 
   # things that could be useful
   validates :rank, presence: false
