@@ -5,6 +5,11 @@ module ApplicationCable
 
     def connect
       reject_unauthorized_connection unless current_user
+      refresh_last_seen_at
+    end
+
+    def refresh_last_seen_at
+      current_user.update_columns last_seen_at: Time.now
     end
 
     def current_user

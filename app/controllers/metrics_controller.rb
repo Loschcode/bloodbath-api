@@ -10,6 +10,7 @@ class MetricsController < ApplicationController
         customers: {
           count: customers.count,
           emails: customers.pluck(:email),
+          last_seen_at: customers.pluck(:last_seen_at),
           updated_at: customers.pluck(:updated_at)
         }
       },
