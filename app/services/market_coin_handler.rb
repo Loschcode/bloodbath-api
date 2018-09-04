@@ -18,6 +18,11 @@ class MarketCoinHandler
       market_coins.each do |market_coin|
         next unless finder.current(market_coin.code)
         market_coin.update! finder.current(market_coin.code)
+        # in case of current all time high we basically set the price
+        # as all time high.
+        if market_coin.all_time_high < market_coin.price
+          market_coin.update! all_time_high: market_coin.price
+        end
       end
 
       base_currencies_handler.refresh(finder.base_currencies_data)
