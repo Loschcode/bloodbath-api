@@ -7,7 +7,11 @@ class MetricsController < ApplicationController
     render json: {
       users: {
         anonymous: anonymous_count,
-        customers: customers_count
+        customers: {
+          count: customers.count,
+          emails: customers.pluck(:email),
+          updated_at: customers.pluck(:updated_at)
+        }
       },
       portfolios: portfolios
     }
@@ -19,8 +23,8 @@ class MetricsController < ApplicationController
     User.where(role: :anonymous).count
   end
 
-  def customers_count
-    User.where(role: :customer).count
+  def customers
+    @customers ||= User.where(role: :customer)
   end
 
   def portfolios
