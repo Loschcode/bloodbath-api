@@ -6,6 +6,13 @@ namespace :cron do
 end
 
 namespace :cron do
+  desc "It will call the Cryptocompare API to get the latest all time high of the coins and insert them in the database"
+  task refresh_all_time_high: :environment do
+    Tasks::Cron::RefreshAllTimeHigh.new.perform
+  end
+end
+
+namespace :cron do
   desc "It will call the Marketcoincap API to get the latest ranks available and refesh the market coins"
   task refresh_market_coins_ranks: :environment do
     Tasks::Cron::RefreshMarketCoinsRanks.new.perform

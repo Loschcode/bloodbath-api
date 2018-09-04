@@ -69,5 +69,4 @@ class CoinApiFinder
   def fetch
     @fetch ||= Cryptocompare::Price.full(coins, currencies)
   end
-
 end

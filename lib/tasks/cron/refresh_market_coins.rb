@@ -31,7 +31,8 @@ class Tasks::Cron::RefreshMarketCoins
       price: 0.0,
       day_open: 0.0,
       day_high: 0.0,
-      day_low: 0.0
+      day_low: 0.0,
+      all_time_high: 0.0
     }
   end
 

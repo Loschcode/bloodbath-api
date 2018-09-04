@@ -11,6 +11,12 @@ refresh_market_coins_worker:
   queue: default
 
 # once per day at midnight
+refresh_all_time_high_worker:
+  cron: "0 0 * * *"
+  class: "RefreshAllTimeHighWorker"
+  queue: default
+
+# once per day at midnight
 refresh_market_coins_ranks_worker:
   cron: "0 0 * * *"
   class: "RefreshMarketCoinsRanksWorker"
