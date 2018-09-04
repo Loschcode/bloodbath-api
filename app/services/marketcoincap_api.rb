@@ -1,6 +1,6 @@
 require 'cryptocompare'
 
-class MarketcoincapApi
+class CoinmarketcapApi
 
   def initialize
   end

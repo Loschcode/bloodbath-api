@@ -21,7 +21,7 @@ class Tasks::Cron::RefreshMarketCoinsRanks
 
   def ranks
     @ranks ||= begin
-      fetch = MarketcoincapApi.new.fetch
+      fetch = CoinmarketcapApi.new.fetch
       fetch.reduce({}) do |acc, coin|
         symbol = coin[:symbol]
         acc[symbol] = coin[:rank]

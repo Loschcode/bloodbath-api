@@ -8,6 +8,7 @@ class Tasks::Cron::RefreshAllTimeHigh
   def perform
     recently_checked_market_coins.each do |market_coin|
 
+      # TODO : find another way to get the historical price because this one is not good.
       fetch = Cryptocompare::PriceHistorical.find(market_coin.code, CoinApiFinder::BASE_CURRENCY)
       all_time_high = fetch[market_coin.code][CoinApiFinder::BASE_CURRENCY]
 

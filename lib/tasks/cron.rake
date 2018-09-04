@@ -13,7 +13,7 @@ namespace :cron do
 end
 
 namespace :cron do
-  desc "It will call the Marketcoincap API to get the latest ranks available and refesh the market coins"
+  desc "It will call the Coinmarketcap API to get the latest ranks available and refesh the market coins"
   task refresh_market_coins_ranks: :environment do
     Tasks::Cron::RefreshMarketCoinsRanks.new.perform
   end
