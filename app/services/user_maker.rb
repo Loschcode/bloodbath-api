@@ -31,11 +31,19 @@ class UserMaker
         role: :anonymous
       ).tap do |user|
         user_setting(user)
+        base_watchlist(user)
       end
     end
   end
 
   private
+
+  def base_watchlist(user)
+    MarketCoin.top.each do |market_coin|
+      user_market_coin = UserMarketCoinHandler.new(user: user, market_coin: market_coin).find
+      user_market_coin.update favorited_at: Time.now
+    end
+  end
 
   def user_setting(user)
     UserSetting.create!(

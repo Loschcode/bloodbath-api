@@ -19,7 +19,7 @@ class CoinsController < ApplicationController
   end
 
   def top
-    @market_coins = MarketCoin.order(rank: :asc).limit(8)
+    @market_coins = MarketCoin.top
     refresh_market_coins(market_coins)
     market_coins.reload
 

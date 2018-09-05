@@ -37,4 +37,6 @@ class MarketCoin < ActiveRecord::Base
     self.where('(full_name ILIKE ?) OR (symbol ILIKE ?) OR (coin_name ILIKE ?) OR (name ILIKE ?)', "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
   end
 
+  scope :top, -> { order(rank: :asc).limit(8) }
+
 end

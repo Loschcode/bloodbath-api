@@ -10,5 +10,4 @@ class UserController < ApplicationController
   def user
     current_user
   end
-
 end
