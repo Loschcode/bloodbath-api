@@ -11,7 +11,7 @@ class CoinsController < ApplicationController
   end
 
   def favorite
-    @market_coins = current_user.user_market_coins.with_favorite.order(favorited_at: :asc).map(&:market_coin)
+    @market_coins = MarketCoin.favorite_of(current_user)
     refresh_market_coins(market_coins)
     market_coins.map(&:reload)
 
