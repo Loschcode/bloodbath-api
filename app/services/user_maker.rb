@@ -31,12 +31,17 @@ class UserMaker
         role: :anonymous
       ).tap do |user|
         user_setting(user)
+        user_portfolio(user)
         base_watchlist(user)
       end
     end
   end
 
   private
+
+  def user_portfolio(user)
+    UserPortfolioHandler.new(user: user).find
+  end
 
   def base_watchlist(user)
     MarketCoin.top.each do |market_coin|
