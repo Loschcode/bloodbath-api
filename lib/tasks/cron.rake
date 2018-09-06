@@ -1,11 +1,4 @@
 namespace :cron do
-  desc "It will remove all anonymous user from the system"
-  task remove_all_anonymous: :environment do
-    Tasks::Cron::RemoveAllAnonymous.new.perform
-  end
-end
-
-namespace :cron do
   desc "It will call the Cryptocompare API to get the latest coins available on the market and insert them in the database"
   task refresh_market_coins: :environment do
     Tasks::Cron::RefreshMarketCoins.new.perform

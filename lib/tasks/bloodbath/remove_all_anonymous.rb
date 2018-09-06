@@ -1,5 +1,5 @@
 # we remove all the anonymous users
-class Tasks::Cron::RemoveAllAnonymous
+class Tasks::Bloodbath::RemoveAllAnonymous
 
   def initialize
     puts "Task initialized."
