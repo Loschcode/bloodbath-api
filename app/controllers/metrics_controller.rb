@@ -1,8 +1,10 @@
 # simple metrics to see clear without admin dashboard
-class MetricsController < ApplicationController
+class MetricsController < BaseController
 
   before_action :set_coin_id, only: [:show]
 
+  # this was made very fast to have some metrics linked to the users
+  # in the ideal we should actually use a third party service
   def index
     render json: {
       users: {

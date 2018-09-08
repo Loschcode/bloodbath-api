@@ -1,4 +1,4 @@
-class UserSettingController < ApplicationController
+class UserSettingController < BaseController
   before_action :authenticated?
 
   def update

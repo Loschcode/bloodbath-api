@@ -37,6 +37,10 @@ class MarketCoin < ActiveRecord::Base
     self.where('(full_name ILIKE ?) OR (symbol ILIKE ?) OR (coin_name ILIKE ?) OR (name ILIKE ?)', "%#{query}%", "%#{query}%", "%#{query}%", "%#{query}%")
   end
 
+  scope :default_order, -> do
+    order(market_cap: :desc).order(rank: :asc)
+  end
+
   scope :top, -> { order(rank: :asc).limit(8) }
 
   scope :favorite_of, -> (user) { joins(:user_market_coins).merge(UserMarketCoin.with_favorite.order(favorited_at: :asc).where(user: user)) }

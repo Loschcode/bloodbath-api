@@ -1,4 +1,4 @@
-class PortfolioCoinsController < ApplicationController
+class PortfolioCoinsController < BaseController
   attr_reader :portfolio_coin
 
   before_action :authenticated?

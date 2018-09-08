@@ -1,4 +1,4 @@
-class UserPortfolioController < ApplicationController
+class UserPortfolioController < BaseController
   attr_reader :user_portfolio
 
   before_action :authenticated?

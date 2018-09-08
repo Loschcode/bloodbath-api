@@ -1,4 +1,4 @@
-class BaseCurrenciesController < ApplicationController
+class BaseCurrenciesController < BaseController
   attr_reader :base_currencies, :base_currency
 
   before_action :authenticated?

@@ -1,4 +1,4 @@
-class UserMarketCoinsController < ApplicationController
+class UserMarketCoinsController < BaseController
   attr_reader :user_market_coins, :user_market_coin
 
   before_action :authenticated?
@@ -24,5 +24,4 @@ class UserMarketCoinsController < ApplicationController
   def set_user_market_coin
     @user_market_coin = UserMarketCoin.find(params[:id])
   end
-
 end

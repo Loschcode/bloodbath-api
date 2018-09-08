@@ -23,10 +23,11 @@ Rails.application.routes.draw do
   resource :user_setting, controller: 'user_setting' do
   end
 
+  resource :user_watchlist, controller: 'user_watchlist' do
+  end
+
   resource :coins, controller: 'coins' do
-    get :top
     get :search
-    get :favorite
     get :weather
   end
 

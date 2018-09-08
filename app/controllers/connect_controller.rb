@@ -1,4 +1,4 @@
-class ConnectController < ApplicationController
+class ConnectController < BaseController
 
   before_action :authenticated?, only: [:register]
 
