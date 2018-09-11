@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
+  EMAIL_FORMAT = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i.freeze
   validates :email, presence: true,
                     uniqueness: true,
-                    format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }
+                    format: { with: EMAIL_FORMAT }
 
   validates :encrypted_password, presence: true
   validates :role, presence: true
@@ -10,6 +11,9 @@ class User < ActiveRecord::Base
 
   has_one :user_setting, dependent: :delete
   has_one :user_portfolio, dependent: :delete
+  has_one :user_watchlist, dependent: :delete
+
+  has_many :watchlist_coins, through: :user_watchlist
   has_many :user_market_coins, dependent: :delete_all
 
   # socket stream

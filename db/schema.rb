@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180904221823) do
+ActiveRecord::Schema.define(version: 20180908151004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,7 +73,6 @@ ActiveRecord::Schema.define(version: 20180904221823) do
   end
 
   create_table "user_market_coins", force: :cascade do |t|
-    t.datetime "favorited_at"
     t.bigint "user_id"
     t.bigint "market_coin_id"
     t.datetime "created_at", null: false
@@ -101,6 +100,13 @@ ActiveRecord::Schema.define(version: 20180904221823) do
     t.index ["user_id"], name: "index_user_settings_on_user_id"
   end
 
+  create_table "user_watchlists", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_watchlists_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "token"
     t.string "role"
@@ -111,6 +117,15 @@ ActiveRecord::Schema.define(version: 20180904221823) do
     t.datetime "last_seen_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["token"], name: "index_users_on_token", unique: true
+  end
+
+  create_table "watchlist_coins", force: :cascade do |t|
+    t.bigint "user_watchlist_id"
+    t.bigint "market_coin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["market_coin_id"], name: "index_watchlist_coins_on_market_coin_id"
+    t.index ["user_watchlist_id"], name: "index_watchlist_coins_on_user_watchlist_id"
   end
 
   add_foreign_key "portfolio_coins", "market_coins", on_delete: :cascade

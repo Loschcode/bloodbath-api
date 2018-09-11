@@ -17,7 +17,7 @@ class MarketWeatherHandler
   private
 
   def refresh_market_coins
-    MarketCoinHandler.new(coin_ids: market_coins.map(&:id)).refresh_and_fetch
+    MarketCoinHandler.new(coin_ids: market_coins.pluck(:id)).refresh_and_fetch
   end
 
   def market_coins

@@ -14,5 +14,4 @@ class UserPortfolioController < BaseController
   def set_user_portfolio
     @user_portfolio = UserPortfolioHandler.new(user: current_user).find
   end
-
 end

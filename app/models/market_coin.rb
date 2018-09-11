@@ -42,7 +42,4 @@ class MarketCoin < ActiveRecord::Base
   end
 
   scope :top, -> { order(rank: :asc).limit(8) }
-
-  scope :favorite_of, -> (user) { joins(:user_market_coins).merge(UserMarketCoin.with_favorite.order(favorited_at: :asc).where(user: user)) }
-
 end

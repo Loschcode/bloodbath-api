@@ -43,7 +43,7 @@ class PortfolioCoinsController < BaseController
   private
 
   def refresh_market_coins(portfolio_coins)
-    MarketCoinHandler.new(coin_ids: portfolio_coins.map(&:market_coin_id)).refresh_and_fetch
+    MarketCoinHandler.new(coin_ids: portfolio_coins.pluck(:market_coin_id)).refresh_and_fetch
   end
 
   def create_portfolio_coin

@@ -28,7 +28,6 @@ Rails.application.routes.draw do
 
   resource :coins, controller: 'coins' do
     get :search
-    get :weather
   end
 
   resources :coins do
@@ -38,6 +37,9 @@ Rails.application.routes.draw do
   end
 
   resources :portfolio_coins do
+  end
+
+  resources :watchlist_coins do
   end
 
   resources :user_market_coins do

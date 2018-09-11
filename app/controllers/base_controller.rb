@@ -9,6 +9,7 @@ class BaseController < ApplicationController
       acc << {
         market_coin: MarketCoinSerializer.new(market_coin),
         user_market_coin: user_market_coin(market_coin),
+        watchlist_coin: WatchlistCoin.includes(:user).where(market_coin: market_coin, 'users.id': current_user.id).take,
         portfolio_coin: portfolio_coin(market_coin)
       }
     end
@@ -26,6 +27,8 @@ class BaseController < ApplicationController
     current_user.user_portfolio.portfolio_coins.where(market_coin: market_coin).first
   end
 
+  # NOTE : this code is shit and should be just removed
+  # scoped used instead
   def user_market_coin(market_coin)
     UserMarketCoinHandler.new(user: current_user, market_coin: market_coin).find
   end

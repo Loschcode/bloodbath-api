@@ -44,9 +44,14 @@ class UserMaker
   end
 
   def base_watchlist(user)
+    user_watchlist = UserWatchlist.create!(
+      user: user
+    )
     MarketCoin.top.each do |market_coin|
-      user_market_coin = UserMarketCoinHandler.new(user: user, market_coin: market_coin).find
-      user_market_coin.update favorited_at: Time.now
+      WatchlistCoin.create!(
+        market_coin: market_coin,
+        user_watchlist: user_watchlist
+      )
     end
   end
 
@@ -60,11 +65,11 @@ class UserMaker
   end
 
   def base_currency
-    BaseCurrency.where(code: 'USD').first
+    BaseCurrency.where(code: 'USD').take
   end
 
   def primary_market_coin
-    MarketCoin.where(code: 'BTC').first
+    MarketCoin.where(code: 'BTC').take
   end
 
   def encrypted(password)
