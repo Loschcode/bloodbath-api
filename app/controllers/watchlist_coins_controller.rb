@@ -7,7 +7,17 @@ class WatchlistCoinsController < BaseController
   end
 
   def create
-    render json: watchlist_coin
+    @watchlist_coin = WatchlistCoin.create(
+      user_watchlist: current_user.user_watchlist,
+      market_coin_id: market_coin.id
+    )
+
+    unless @watchlist_coin.persisted?
+      throw_error "#{@watchlist_coin.errors.full_messages.join(', ')}"
+      return
+    end
+
+    render json: @watchlist_coin
   end
 
   def update
@@ -15,6 +25,11 @@ class WatchlistCoinsController < BaseController
   end
 
   def destroy
+    unless watchlist_coin.destroy
+      throw_error "#{watchlist_coin.errors.full_messages.join(', ')}"
+      return
+    end
+    render json: {}
   end
 
   private
@@ -23,15 +38,12 @@ class WatchlistCoinsController < BaseController
     @watchlist_coins ||= current_user.user_watchlist.watchlist_coins.order(created_at: :asc)
   end
 
-  def refresh_market_coins(watchlist_coins)
-    MarketCoinHandler.new(coin_ids: watchlist_coins.pluck(:market_coin_id)).refresh_and_fetch
+  def watchlist_coin
+    @watchlist_coin ||= WatchlistCoin.find params[:id]
   end
 
-  def watchlist_coin
-    @watchlist_coin ||= WatchlistCoin.first_or_create!(
-      user_watchlist: current_user.user_watchlist,
-      market_coin: market_coin
-    )
+  def refresh_market_coins(watchlist_coins)
+    MarketCoinHandler.new(coin_ids: watchlist_coins.pluck(:market_coin_id)).refresh_and_fetch
   end
 
   def watchlist_coin_params
@@ -39,10 +51,6 @@ class WatchlistCoinsController < BaseController
   end
 
   def market_coin
-    MarketCoin.find_by(id: params[:market_coin_id])
-  end
-
-  def watchlist_coin
-    @watchlist_coin ||= WatchlistCoins.find params[:id]
+    MarketCoin.find_by(id: watchlist_coin_params[:market_coin_id])
   end
 end
