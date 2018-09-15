@@ -25,6 +25,8 @@ module BloodbathApi
     config.autoload_paths += Dir[Rails.root.join('app', 'services', '*'), Rails.root.join('lib')]
     config.eager_load_paths += Dir[Rails.root.join('lib')] # this is for Sidekiq
 
+    # config.autoload_paths << Rails.root.join('app', 'graphql')
+
     # compress the API payload
     config.middleware.insert_after ActionDispatch::Static, Rack::Deflater
 
