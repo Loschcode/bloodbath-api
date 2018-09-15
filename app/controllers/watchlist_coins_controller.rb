@@ -12,7 +12,7 @@ class WatchlistCoinsController < BaseController
       market_coin_id: market_coin.id
     )
 
-    unless @watchlist_coin.persisted?
+    if @watchlist_coin.errors.any?
       throw_error "#{@watchlist_coin.errors.full_messages.join(', ')}"
       return
     end

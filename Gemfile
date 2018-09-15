@@ -14,6 +14,9 @@ gem 'rails', '~> 5.1.4'
 gem 'sidekiq', '~> 5.0.5'
 gem 'sidekiq-cron', '~> 0.6.3'
 
+# GraphQL
+gem 'graphql', '~> 1.8.9'
+
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 

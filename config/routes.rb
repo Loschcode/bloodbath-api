@@ -1,6 +1,7 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  post "/graphql", to: "graphql#execute"
   get 'home/index'
   root 'home#index'
   mount Sidekiq::Web => '/sidekiq'
