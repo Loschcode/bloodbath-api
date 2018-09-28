@@ -25,9 +25,11 @@ class ApplicationController < ActionController::API
 
   def current_user
     @current_user ||= begin
-      if params[:token]
-        User.find_by_token(params[:token])
-      end
+      User.find_by_token current_token if current_token
     end
+  end
+
+  def current_token
+    params[:token] || request.headers[:token]
   end
 end

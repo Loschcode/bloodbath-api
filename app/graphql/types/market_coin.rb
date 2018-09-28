@@ -1,5 +1,5 @@
 module Types
-  class Coin < GraphQL::Schema::Object
+  class MarketCoin < GraphQL::Schema::Object
     description "A coin"
 
     field :id, ID, null: false

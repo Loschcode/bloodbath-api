@@ -1,22 +1,23 @@
 module Types
   class QueryType < Types::BaseObject
+    field :GetWatchlistCoin, [Types::WatchlistCoin], null: true do
+      description "Find a watchlist coin by ID"
+      argument :id, ID, required: true
+    end
 
-     field :coin, [Types::Coin], null: true do
-       description "Find a coin by ID"
-       argument :id, ID, required: true
-     end
+    def get_watchlist_coin(id:)
+      return unless current_user
+      current_user.watchlist_coins.find_by(id: id)
+    end
 
-     def coin(id:)
-       MarketCoin.find(id)
-     end
+    field :GetWatchlistCoins, [Types::WatchlistCoin], null: false do
+      description "Find watchlist coins"
+    end
 
-     field :coins, [Types::Coin], null: false do
-       description "Find all coins"
-     end
-
-     def coins
-       MarketCoin.all
-     end
+    def get_watchlist_coins
+      return [] unless current_user
+      current_user.watchlist_coins
+    end
   end
 end
 
