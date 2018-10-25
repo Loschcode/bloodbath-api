@@ -1,5 +1,5 @@
 module Types
-  class WatchlistCoin < GraphQL::Schema::Object
+  class WatchlistCoin < Types::BaseObject
     description "A watchlist coin"
 
     field :id, ID, null: false
