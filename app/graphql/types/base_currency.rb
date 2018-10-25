@@ -7,6 +7,9 @@ module Types
     field :symbol, String, null: false
     field :full_name, String, null: false
 
+    field :created_at, GraphQL::Types::ISO8601DateTime, null: false
+    field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+
     field :user_settings, [Types::UserSetting], null: true
   end
 end

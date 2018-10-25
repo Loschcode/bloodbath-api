@@ -1,13 +1,12 @@
 module Types
-  class WatchlistCoin < Types::BaseObject
-    description "A watchlist coin"
+  class UserWatchlist < Types::BaseObject
+    description "A coin from the portfolio of a user"
 
     field :id, ID, null: false
 
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
-    field :user_watchlist, Types::UserWatchlist, null: false
-    field :market_coin, Types::MarketCoin, null: false
+    field :user, Types::User, null: false
   end
 end
