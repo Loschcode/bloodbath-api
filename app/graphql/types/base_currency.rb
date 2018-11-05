@@ -2,6 +2,7 @@ module Types
   class BaseCurrency < Types::BaseObject
     description "The base currency used to convert values to understandable fiat money"
 
+    field :id, ID, null: false
     field :code, String, null: false
     field :exchange_rate, Float, null: false
     field :symbol, String, null: false

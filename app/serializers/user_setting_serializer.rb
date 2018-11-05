@@ -3,5 +3,4 @@ class UserSettingSerializer < ActiveModel::Serializer
 
   belongs_to :primary_market_coin
   belongs_to :base_currency
-
 end

@@ -14,5 +14,4 @@ class MarketCoinSerializer < ActiveModel::Serializer
   def day_low_variation
     (object.day_low / object.day_open - 1).to_f
   end
-
 end

@@ -6,5 +6,4 @@ class UserSerializer < ActiveModel::Serializer
   def user_setting
     UserSettingSerializer.new(object.user_setting)
   end
-
 end
