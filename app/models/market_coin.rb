@@ -27,6 +27,7 @@ class MarketCoin < ActiveRecord::Base
 
   # trackings
   has_many :user_market_coins
+  has_many :watchlist_coins
 
   # channel users
   has_one :market_coin_stream

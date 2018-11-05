@@ -25,5 +25,7 @@ module Types
 
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+
+    field :watchlist_coins, [Types::WatchlistCoin], null: true
   end
 end
