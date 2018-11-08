@@ -10,5 +10,6 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     field :user_portfolio, Types::UserPortfolio, null: false
+    field :market_coin, Types::MarketCoin, null: false
   end
 end

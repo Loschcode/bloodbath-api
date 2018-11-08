@@ -8,7 +8,6 @@ class BaseController < ApplicationController
     market_coins.reduce([]) do |acc, market_coin|
       acc << {
         market_coin: MarketCoinSerializer.new(market_coin),
-        user_market_coin: user_market_coin(market_coin),
         watchlist_coin: WatchlistCoin.includes(:user).where(market_coin: market_coin, 'users.id': current_user.id).take,
         portfolio_coin: portfolio_coin(market_coin)
       }

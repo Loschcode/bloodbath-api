@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_one :user_watchlist, dependent: :delete
 
   has_many :watchlist_coins, through: :user_watchlist
-  has_many :user_market_coins, dependent: :delete_all
+  has_many :portfolio_coins, through: :user_portfolio
 
   # socket stream
   has_and_belongs_to_many :market_coin_streams
