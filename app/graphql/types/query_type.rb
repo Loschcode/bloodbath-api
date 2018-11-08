@@ -30,6 +30,15 @@ module Types
       ::MarketCoin.all
     end
 
+    field :getWatchlist, Types::UserWatchlist, null: true do
+      description "Find the current user watchlist"
+    end
+
+    def get_watchlist
+      return unless current_user
+      current_user.user_watchlist
+    end
+
     field :getWatchlistCoin, Types::WatchlistCoin, null: true do
       description "Find a watchlist coin by ID"
       argument :id, ID, required: true

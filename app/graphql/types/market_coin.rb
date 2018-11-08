@@ -30,17 +30,5 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     field :watchlist_coins, [Types::WatchlistCoin], null: true
-
-    def price_variation
-      (object.price / object.day_open - 1).to_f
-    end
-
-    def day_high_variation
-      (object.day_high / object.day_open - 1).to_f
-    end
-
-    def day_low_variation
-      (object.day_low / object.day_open - 1).to_f
-    end
   end
 end

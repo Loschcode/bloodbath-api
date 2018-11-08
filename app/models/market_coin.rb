@@ -43,4 +43,16 @@ class MarketCoin < ActiveRecord::Base
   end
 
   scope :top, -> { order(rank: :asc).limit(8) }
+
+  def price_variation
+    (price / day_open - 1).to_f
+  end
+
+  def day_high_variation
+    (day_high / day_open - 1).to_f
+  end
+
+  def day_low_variation
+    (day_low / day_open - 1).to_f
+  end
 end
