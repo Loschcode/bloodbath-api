@@ -11,21 +11,22 @@ module Types
       current_user.user_setting
     end
 
-    field :getMarketCoin, Types::MarketCoin, null: true do
+    field :marketCoin, Types::MarketCoin, null: true do
       description "Find a market coin by ID"
       argument :id, ID, required: true
     end
 
-    def get_market_coin(id:)
+    def market_coin(id:)
       return unless current_user
       ::MarketCoin.find_by(id: id)
     end
 
-    field :getMarketCoins, [Types::MarketCoin], null: true do
+    field :marketCoins, [Types::MarketCoin], null: true do
       description "Find all market coins"
+      argument :filter, Types::JsonType, required: false
     end
 
-    def get_market_coins
+    def market_coins(filter:{})
       return unless current_user
       ::MarketCoin.all
     end
