@@ -2,17 +2,39 @@ module Types
   class QueryType < Types::BaseObject
     extend ActiveSupport::Concern
 
-    field :getUserSetting, Types::UserSetting, null: true do
-      description "Find user setting of the current user"
+    field :user, Types::User, null: true do
+      argument :id, ID, required: true
     end
 
-    def get_user_setting
+    def user
+      return unless current_user
+      ::User.find_by(id: id)
+    end
+
+    field :users, [Types::User], null: true do
+    end
+
+    def users
+      return [] unless current_user
+      ::User.all
+    end
+
+    field :currentUser, Types::User, null: true do
+    end
+
+    def current_user
+      super
+    end
+
+    field :userSetting, Types::UserSetting, null: true do
+    end
+
+    def user_setting
       return unless current_user
       current_user.user_setting
     end
 
     field :marketCoin, Types::MarketCoin, null: true do
-      description "Find a market coin by ID"
       argument :id, ID, required: true
     end
 
@@ -22,7 +44,6 @@ module Types
     end
 
     field :marketCoins, [Types::MarketCoin], null: true do
-      description "Find all market coins"
       argument :filter, Types::JsonType, required: false
     end
 
@@ -31,49 +52,46 @@ module Types
       ::MarketCoin.all
     end
 
-    field :getWatchlist, Types::UserWatchlist, null: true do
-      description "Find the current user watchlist"
+    field :watchlist, Types::UserWatchlist, null: true do
     end
 
-    def get_watchlist
+    def watchlist
       return unless current_user
       current_user.user_watchlist
     end
 
-    field :getPortfolioCoin, Types::PortfolioCoin, null: true do
-      description "Find a portfolio coin by ID"
+    field :portfolioCoin, Types::PortfolioCoin, null: true do
       argument :id, ID, required: true
     end
 
-    def get_portfolio_coin(id:)
+    def portfolio_coin(id:)
       return unless current_user
       current_user.portfolio_coins.find_by(id: id)
     end
 
-    field :getPortfolioCoins, [Types::PortfolioCoin], null: false do
+    field :portfolioCoins, [Types::PortfolioCoin], null: false do
       description "Find portfolio coins"
     end
 
-    def get_portfolio_coins
+    def portfolio_coins
       return [] unless current_user
       current_user.portfolio_coins
     end
 
-    field :getWatchlistCoin, Types::WatchlistCoin, null: true do
-      description "Find a watchlist coin by ID"
+    field :watchlistCoin, Types::WatchlistCoin, null: true do
       argument :id, ID, required: true
     end
 
-    def get_watchlist_coin(id:)
+    def watchlist_coin(id:)
       return unless current_user
       current_user.watchlist_coins.find_by(id: id)
     end
 
-    field :getWatchlistCoins, [Types::WatchlistCoin], null: false do
+    field :watchlistCoins, [Types::WatchlistCoin], null: false do
       description "Find watchlist coins"
     end
 
-    def get_watchlist_coins
+    def watchlist_coins
       return [] unless current_user
       current_user.watchlist_coins
     end
