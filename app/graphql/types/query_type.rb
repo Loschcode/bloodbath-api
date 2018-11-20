@@ -26,6 +26,13 @@ module Types
       super
     end
 
+    field :currentUsers, [Types::User], null: true do
+    end
+
+    def current_users
+      [current_user]
+    end
+
     field :userSetting, Types::UserSetting, null: true do
     end
 
