@@ -2,35 +2,11 @@ module Types
   class QueryType < Types::BaseObject
     extend ActiveSupport::Concern
 
-    field :user, Types::User, null: true do
-      argument :id, ID, required: true
-    end
-
-    def user
-      return unless current_user
-      ::User.find_by(id: id)
-    end
-
-    field :users, [Types::User], null: true do
-    end
-
-    def users
-      return [] unless current_user
-      ::User.all
-    end
-
     field :currentUser, Types::User, null: true do
     end
 
     def current_user
       super
-    end
-
-    field :currentUsers, [Types::User], null: true do
-    end
-
-    def current_users
-      [current_user]
     end
 
     field :userSetting, Types::UserSetting, null: true do
