@@ -2,12 +2,7 @@ module Types
   class QueryType < Types::BaseObject
     extend ActiveSupport::Concern
 
-    field :currentUser, Types::User, null: true do
-    end
-
-    def current_user
-      super
-    end
+    field :currentUser, resolver: Queries::GetCurrentUser
 
     field :userSetting, Types::UserSetting, null: true do
     end
