@@ -2,76 +2,17 @@ module Types
   class QueryType < Types::BaseObject
     extend ActiveSupport::Concern
 
-    field :currentUser, resolver: Queries::GetCurrentUser
+    field :currentUser, resolver: Queries::ShowCurrentUser
+    field :userSetting, resolver: Queries::ShowUserSetting
+    field :watchlist, resolver: Queries::IndexUserWatchlist
 
-    field :userSetting, Types::UserSetting, null: true do
-    end
+    field :marketCoin, resolver: Queries::ShowMarketCoin
+    field :marketCoins, resolver: Queries::IndexMarketCoins
 
-    def user_setting
-      return unless current_user
-      current_user.user_setting
-    end
+    field :portfolioCoin, resolver: Queries::ShowPortfolioCoin
+    field :portfolioCoins, resolver: Queries::IndexPortfolioCoins
 
-    field :marketCoin, Types::MarketCoin, null: true do
-      argument :id, ID, required: true
-    end
-
-    def market_coin(id:)
-      return unless current_user
-      ::MarketCoin.find_by(id: id)
-    end
-
-    field :marketCoins, [Types::MarketCoin], null: true do
-      argument :filter, Types::JsonType, required: false
-    end
-
-    def market_coins(filter:{})
-      return unless current_user
-      ::MarketCoin.all
-    end
-
-    field :watchlist, Types::UserWatchlist, null: true do
-    end
-
-    def watchlist
-      return unless current_user
-      current_user.user_watchlist
-    end
-
-    field :portfolioCoin, Types::PortfolioCoin, null: true do
-      argument :id, ID, required: true
-    end
-
-    def portfolio_coin(id:)
-      return unless current_user
-      current_user.portfolio_coins.find_by(id: id)
-    end
-
-    field :portfolioCoins, [Types::PortfolioCoin], null: false do
-      description "Find portfolio coins"
-    end
-
-    def portfolio_coins
-      return [] unless current_user
-      current_user.portfolio_coins
-    end
-
-    field :watchlistCoin, Types::WatchlistCoin, null: true do
-      argument :id, ID, required: true
-    end
-
-    def watchlist_coin(id:)
-      return unless current_user
-      current_user.watchlist_coins.find_by(id: id)
-    end
-
-    field :watchlistCoins, [Types::WatchlistCoin], null: false do
-      description "Find watchlist coins"
-    end
-
-    def watchlist_coins
-      return [] unless current_user
-      current_user.watchlist_coins
-    end
+    field :watchlistCoin, resolver: Queries::ShowWatchlistCoin
+    field :watchlistCoins, resolver: Queries::IndexWatchlistCoins
   end
 end
