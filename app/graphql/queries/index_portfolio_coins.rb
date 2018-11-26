@@ -1,6 +1,6 @@
 module Queries
   class IndexPortfolioCoins < Queries::BaseQuery
-    type [Types::PortfolioCoins], null: true
+    type [Types::PortfolioCoin], null: true
     description "Get the portfolio coins"
 
     def resolve

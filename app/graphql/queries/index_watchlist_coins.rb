@@ -1,6 +1,6 @@
 module Queries
   class IndexWatchlistCoins < Queries::BaseQuery
-    type [Types::WatchlistCoins], null: true
+    type [Types::WatchlistCoin], null: true
     description "Get the portfolio coins"
 
     def resolve
