@@ -1,12 +1,19 @@
 module Mutations
   class CreateAnonymousUser < Mutations::BaseMutation
-    # argument :body, String, required: true
-    # argument :post_id, ID, required: true
-
     field :token, String, null: true
 
-    def resolve # (body:, post_id:)
-      { token: 'XXX' }
+    def resolve
+      # return if current_user
+
+      {
+        token: user_maker.anonymous.token
+      }
+    end
+
+    private
+
+    def user_maker
+      @user_maker ||= UserMaker.new
     end
   end
 end
