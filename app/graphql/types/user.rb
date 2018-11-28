@@ -13,6 +13,8 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :last_seen_at, GraphQL::Types::ISO8601DateTime, null: false
 
+    field :user_setting, Types::UserSetting, null: false
     field :user_portfolio, Types::UserPortfolio, null: false
+    field :user_watchlist, Types::UserWatchlist, null: false
   end
 end

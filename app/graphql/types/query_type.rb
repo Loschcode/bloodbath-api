@@ -5,6 +5,7 @@ module Types
     field :currentUser, resolver: Queries::ShowCurrentUser
     field :userSetting, resolver: Queries::ShowUserSetting
     field :userWatchlist, resolver: Queries::ShowUserWatchlist
+    field :userPortfolio, resolver: Queries::ShowUserPortfolio
 
     field :marketCoin, resolver: Queries::ShowMarketCoin
     field :marketCoins, resolver: Queries::IndexMarketCoins

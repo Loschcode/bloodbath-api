@@ -4,12 +4,13 @@ module Types
 
     field :id, ID, null: false
 
+    field :watchlist_weather, Float, null: false
+
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     field :user, Types::User, null: false
-
-    field :watchlist_weather, Float, null: false
+    field :watchlist_coins, [Types::WatchlistCoin], null: false
 
     def watchlist_weather
       variations = []
