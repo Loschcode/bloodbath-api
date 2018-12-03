@@ -28,7 +28,6 @@ gem 'redis', '~> 3.0'
 
 # Serializer for JSON output
 gem 'active_model_serializers', '~> 0.9'
-
 # Crypto following
 gem 'cryptocompare', '~> 0.13.0'
 

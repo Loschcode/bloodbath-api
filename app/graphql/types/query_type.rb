@@ -7,6 +7,9 @@ module Types
     field :userWatchlist, resolver: Queries::ShowUserWatchlist
     field :userPortfolio, resolver: Queries::ShowUserPortfolio
 
+    field :baseCurrency, resolver: Queries::ShowBaseCurrency
+    field :baseCurrencies, resolver: Queries::IndexBaseCurrencies
+
     field :marketCoin, resolver: Queries::ShowMarketCoin
     field :marketCoins, resolver: Queries::IndexMarketCoins
 
