@@ -3,7 +3,7 @@ module Mutations
     field :token, String, null: true
 
     def resolve
-      # return if current_user
+      return if current_user
 
       {
         token: user_maker.anonymous.token
